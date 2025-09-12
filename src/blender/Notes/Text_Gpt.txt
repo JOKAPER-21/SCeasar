@@ -1,0 +1,174 @@
+ S_Ceasar/
+    operators/
+        modeling/   
+            __init__.py
+            op_subsurf_add.py
+            op_subsurf_edit.py
+            op_subsurf_remove.py
+        __init__.py
+    ui/
+        __init__.py
+        core_ui.py
+        modeling_ui.py
+    __init__.py
+        
+
+Ceasar/operator/modeling/__init__.py
+from . import op_subsurf_add, op_subsurf_edit, op_subsurf_remove
+
+def register():
+    op_subsurf_add.register()
+    op_subsurf_edit.register()
+    op_subsurf_remove.register()
+
+def unregister():
+    op_subsurf_remove.unregister()
+    op_subsurf_edit.unregister()
+    op_subsurf_add.unregister()
+
+Ceasar/operator/modeling/op_subsurf_add
+import bpy
+
+class SCEASAR_OT_add_subsurf_popup(bpy.types.Operator):
+    bl_idname = "object.add_subsurf_popup"
+    bl_label = "Add Subsurf"
+    bl_options = {'REGISTER', 'UNDO'}
+    
+    viewport_levels = bpy.props.IntProperty(name="Viewport", default=2, min=0, max=6)
+    render_levels = bpy.props.IntProperty(name="Render", default=2, min=0, max=6)
+    
+    def execute(self, context):
+        meshes = [obj for obj in context.selected_objects if obj.type == 'MESH']
+        if not meshes:
+            self.report({'ERROR'}, "No mesh objects selected")
+            return {'CANCELLED'}
+        
+        for obj in meshes:
+            if "MySubsurf" not in obj.modifiers:
+                mod = obj.modifiers.new(name="MySubsurf", type='SUBSURF')
+                mod.levels = self.viewport_levels
+                mod.render_levels = self.render_levels
+        
+        self.report({'INFO'}, f"Subsurf added to {len(meshes)} object(s)")
+        return {'FINISHED'}
+    
+    def invoke(self, context, event):
+        return context.window_manager.invoke_props_dialog(self)
+    
+    def draw(self, context):
+        layout = self.layout
+        col = layout.column(align=True)
+        col.prop(self, "viewport_levels")
+        col.prop(self, "render_levels")
+
+def register():
+    bpy.utils.register_class(SCEASAR_OT_add_subsurf_popup)
+
+def unregister():
+    bpy.utils.unregister_class(SCEASAR_OT_add_subsurf_popup)
+
+S_Ceasar/__init__.py
+from . import modeling
+
+def register():
+    modeling.register()
+
+def unregister():
+    modeling.unregister()
+
+S_Ceasar/ui/__init__.py
+from . import (
+    core_ui,
+    modeling_ui,
+)
+
+def register():
+    core_ui.register()
+    modeling_ui.register()
+
+
+def unregister():
+
+    modeling_ui.unregister()
+    core_ui.unregister()
+
+S_Ceasar/ui/core_ui.py
+import bpy
+
+class SCEASAR_Properties(bpy.types.PropertyGroup):
+    mode: bpy.props.EnumProperty(
+        name="Department",
+        items = [
+            ('MODELING', "Modeling", "Modeling Tools", 'CUBE', 0),
+            ('UV', "UV Mapping", "UV Tools", 'GROUP_UVS', 1),
+            ('TEXTURING', "Texturing", "Texturing Tools", 'TEXTURE', 2),
+            ('LOOKDEV', "Lookdev", "Look Development Tools", 'MATERIAL', 3),
+            ('RIGGING', "Rigging", "Rigging Tools", 'ARMATURE_DATA', 4),
+            ('LAYOUT', "Layout", "Layout / Previs Tools", 'OUTLINER_OB_CAMERA', 5),
+            ('ANIMATION', "Animation", "Animation Tools", 'OUTLINER_OB_ARMATURE', 6),
+            ('SIMULATION', "Simulation", "Simulation Tools", 'MOD_PHYSICS', 7),
+            ('FX', "Effects", "FX Tools", 'MOD_PARTICLES', 8),
+            ('LIGHTING', "Lighting", "Lighting Tools", 'LIGHT', 9),
+            ('COMPOSITING', "Compositing", "Compositing Tools", 'NODETREE', 10),
+            ('RENDERING', "Rendering", "Rendering Tools", 'RENDER_STILL', 11),           
+        ],
+
+        default='MODELING'
+    ) # type: ignore
+
+class SCEASAR_PT_Main(bpy.types.Panel):
+    bl_label = "S Ceasar"
+    bl_idname = "SCEASAR_PT_main"
+    bl_space_type = "VIEW_3D"
+    bl_region_type = "UI"
+    bl_category = "S Ceasar"
+
+    def draw(self, context):
+        layout = self.layout
+        props = context.scene.sceasar_props
+        
+        row = layout.row()
+        row.scale_y = 1.5
+        row.prop(props, "mode", text="")
+
+classes = (SCEASAR_Properties, SCEASAR_PT_Main)
+
+def register():
+    for cls in classes:
+        bpy.utils.register_class(cls)
+    bpy.types.Scene.sceasar_props = bpy.props.PointerProperty(type=SCEASAR_Properties)
+
+def unregister():
+    del bpy.types.Scene.sceasar_props
+    for cls in reversed(classes):
+        bpy.utils.unregister_class(cls)
+
+S_Ceasar/ui/modeling_ui.py
+import bpy
+
+class SCEASAR_PT_Modeling(bpy.types.Panel):
+    bl_label = "Modeling"
+    bl_idname = "SCEASAR_PT_modeling"
+    bl_space_type = "VIEW_3D"
+    bl_region_type = "UI"
+    bl_category = "S Ceasar"
+    bl_parent_id = "SCEASAR_PT_main"
+    bl_options = {'DEFAULT_CLOSED'}   # 👈 collapsed by default
+
+    @classmethod
+    def poll(cls, context):
+        return context.scene.sceasar_props.mode == 'MODELING'
+
+    def draw(self, context):
+        layout = self.layout
+        layout.operator("sceasar.add_subsurf_popup")
+        layout.operator("sceasar.edit_subsurf_popup")
+        layout.operator("sceasar.remove_subsurf")
+
+
+def register():
+    bpy.utils.register_class(SCEASAR_PT_Modeling)
+
+def unregister():
+    bpy.utils.unregister_class(SCEASAR_PT_Modeling)
+

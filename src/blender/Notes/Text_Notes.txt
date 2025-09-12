@@ -1,0 +1,54 @@
+('MODELING', "Modeling", "Modeling Tools", 'CUBE', 0),
+('UV', "UV Mapping", "UV Tools", 'GROUP_UVS', 1),
+('TEXTURING', "Texturing", "Texturing Tools", 'TEXTURE', 2),
+('LOOKDEV', "Lookdev", "Look Development Tools", 'MATERIAL', 3),
+('RIGGING', "Rigging", "Rigging Tools", 'ARMATURE_DATA', 4),
+('LAYOUT', "Layout", "Layout / Previs Tools", 'OUTLINER_OB_CAMERA', 5),
+('ANIMATION', "Animation", "Animation Tools", 'OUTLINER_OB_ARMATURE', 6),
+('SIMULATION', "Simulation", "Simulation Tools", 'MOD_PHYSICS', 7),
+('FX', "Effects", "FX Tools", 'MOD_PARTICLES', 8),
+('LIGHTING', "Lighting", "Lighting Tools", 'LIGHT', 9),
+('COMPOSITING', "Compositing", "Compositing Tools", 'NODETREE', 10),
+('RENDERING', "Rendering", "Rendering Tools", 'RENDER_STILL', 11),  
+
+
+MODELING
+UV
+TEXTURING
+LOOKDEV
+RIGGING
+LAYOUT
+ANIMATION
+SIMULATION
+FX
+LIGHTING
+COMPOSITING
+RENDERING
+
+
+Modeling
+Uv
+Texturing
+Lookdev
+Rigging
+Layout
+Animation
+Simulation
+Fx
+Lighting
+Compositing
+Rendering
+
+
+MOD
+UVS
+TEX
+LKD
+RIG
+LAY
+ANI
+SIM
+FX
+LGT
+CMP
+RND
