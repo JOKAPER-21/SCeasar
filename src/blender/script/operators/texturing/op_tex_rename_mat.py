@@ -9,7 +9,7 @@ def index_to_letters(index):
     second = chr(65 + (index % 26))       # A-Z
     return first + second
 
-class SCEASAR_OT_rename_mat(Operator):
+class SCEASAR_OT_tex_rename_mat(Operator):
     bl_idname = "sceasar.rename_materials"
     bl_label = "Rename Materials"
     bl_description = "Rename materials of selected mesh objects to <mesh_name>_<index>_Mat"
@@ -42,7 +42,7 @@ class SCEASAR_OT_rename_mat(Operator):
         return {'FINISHED'}
 
 def register():
-    bpy.utils.register_class(SCEASAR_OT_rename_mat)
+    bpy.utils.register_class(SCEASAR_OT_tex_rename_mat)
 
 def unregister():
-    bpy.utils.unregister_class(SCEASAR_OT_rename_mat)
+    bpy.utils.unregister_class(SCEASAR_OT_tex_rename_mat)

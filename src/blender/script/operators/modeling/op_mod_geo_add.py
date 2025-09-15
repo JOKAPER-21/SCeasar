@@ -1,7 +1,7 @@
 import bpy
 from bpy.types import Operator, Panel
 
-class SCEASAR_OT_add_geo(Operator):
+class SCEASAR_OT_mod_add_geo(Operator):
     bl_idname = "sceasar.add_geo"
     bl_label = "Rename Mesh to Geo"
     bl_description = "Rename selected mesh objects to <name>_Geo if not already named"
@@ -32,7 +32,7 @@ class SCEASAR_OT_add_geo(Operator):
         return {'FINISHED'}
 
 def register():
-    bpy.utils.register_class(SCEASAR_OT_add_geo)
+    bpy.utils.register_class(SCEASAR_OT_mod_add_geo)
 
 def unregister():
-    bpy.utils.unregister_class(SCEASAR_OT_add_geo)
+    bpy.utils.unregister_class(SCEASAR_OT_mod_add_geo)

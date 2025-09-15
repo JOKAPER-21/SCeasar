@@ -1,7 +1,7 @@
 import bpy
 from bpy.types import Operator, Panel
 
-class SCEASAR_OT_clear_all_materials(Operator):
+class SCEASAR_OT_tex_clear_all_materials(Operator):
     bl_idname = "sceasar.clear_all_mat"
     bl_label = "Clear All Materials"
     bl_description = "Remove all material slots from selected mesh objects"
@@ -27,8 +27,8 @@ class SCEASAR_OT_clear_all_materials(Operator):
         return {'FINISHED'}
 
 def register():
-    bpy.utils.register_class(SCEASAR_OT_clear_all_materials)
+    bpy.utils.register_class(SCEASAR_OT_tex_clear_all_materials)
 
 
 def unregister():
-    bpy.utils.unregister_class(SCEASAR_OT_clear_all_materials)
+    bpy.utils.unregister_class(SCEASAR_OT_tex_clear_all_materials)

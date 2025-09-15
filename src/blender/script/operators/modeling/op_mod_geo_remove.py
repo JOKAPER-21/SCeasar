@@ -1,7 +1,7 @@
 import bpy
 from bpy.types import Operator
 
-class SCEASAR_OT_remove_geo(Operator):
+class SCEASAR_OT_mod_remove_geo(Operator):
     bl_idname = "sceasar.remove_geo"
     bl_label = "Remove _Geo from Mesh Names"
     bl_description = "Remove '_Geo' suffix from selected mesh objects if present"
@@ -31,7 +31,7 @@ class SCEASAR_OT_remove_geo(Operator):
         return {'FINISHED'}
 
 def register():
-    bpy.utils.register_class(SCEASAR_OT_remove_geo)
+    bpy.utils.register_class(SCEASAR_OT_mod_remove_geo)
 
 def unregister():
-    bpy.utils.unregister_class(SCEASAR_OT_remove_geo)
+    bpy.utils.unregister_class(SCEASAR_OT_mod_remove_geo)

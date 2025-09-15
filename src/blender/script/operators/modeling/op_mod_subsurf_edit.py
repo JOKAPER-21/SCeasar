@@ -1,6 +1,6 @@
 import bpy
 
-class SCEASAR_OT_edit_subsurf_popup(bpy.types.Operator):
+class SCEASAR_OT_mod_edit_subsurf_popup(bpy.types.Operator):
     bl_idname = "sceasar.edit_subsurf_popup"
     bl_label = "Edit Subsurf"
     bl_options = {'REGISTER', 'UNDO'}
@@ -46,7 +46,7 @@ class SCEASAR_OT_edit_subsurf_popup(bpy.types.Operator):
         col.prop(self, "render_levels")
 
 def register():
-    bpy.utils.register_class(SCEASAR_OT_edit_subsurf_popup)
+    bpy.utils.register_class(SCEASAR_OT_mod_edit_subsurf_popup)
 
 def unregister():
-    bpy.utils.unregister_class(SCEASAR_OT_edit_subsurf_popup)
+    bpy.utils.unregister_class(SCEASAR_OT_mod_edit_subsurf_popup)

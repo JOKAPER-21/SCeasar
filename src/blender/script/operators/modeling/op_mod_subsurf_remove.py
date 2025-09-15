@@ -1,6 +1,6 @@
 import bpy
 
-class SCEASAR_OT_remove_subsurf(bpy.types.Operator):
+class SCEASAR_OT_mod_remove_subsurf(bpy.types.Operator):
     bl_idname = "sceasar.remove_subsurf"
     bl_label = "Remove Subsurf"
     
@@ -25,7 +25,7 @@ class SCEASAR_OT_remove_subsurf(bpy.types.Operator):
         return {'FINISHED'}
 
 def register():
-    bpy.utils.register_class(SCEASAR_OT_remove_subsurf)
+    bpy.utils.register_class(SCEASAR_OT_mod_remove_subsurf)
 
 def unregister():
-    bpy.utils.unregister_class(SCEASAR_OT_remove_subsurf)
+    bpy.utils.unregister_class(SCEASAR_OT_mod_remove_subsurf)
