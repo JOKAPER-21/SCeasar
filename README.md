@@ -1,4 +1,4 @@
-**Production Pipeline For Small Project**
+Production Pipeline For Small Project
 
 
 assets :
