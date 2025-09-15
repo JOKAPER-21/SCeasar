@@ -21,12 +21,6 @@ class SCEASAR_PT_Modeling_Tools(bpy.types.Panel):
         row.operator("sceasar.add_subsurf_popup", text="Add", icon="PLUS")
         row.operator("sceasar.edit_subsurf_popup", text="Edit", icon="GREASEPENCIL")
         row.operator("sceasar.remove_subsurf", text="Remove", icon="CANCEL")
-        
-        box = layout.box()
-        box.label(text="Basic Setup", icon="OUTLINER_OB_MESH")
-        row = box.row(align=True)
-        row.operator("sceasar.add_geo", text="Add Geo", icon="CURRENT_FILE")
-        row.operator("sceasar.remove_geo", text="Remove Geo", icon="CURRENT_FILE")
 
 class SCEASAR_PT_Modeling_Setting(bpy.types.Panel):
     bl_label = "Setting"
@@ -45,7 +39,10 @@ class SCEASAR_PT_Modeling_Setting(bpy.types.Panel):
         layout = self.layout
         
         box = layout.box()
-        box.label(text="Subdivision Surface", icon="MODIFIER")
+        box.label(text="Basic Setup", icon="OUTLINER_OB_MESH")
+        row = box.row(align=True)
+        row.operator("sceasar.add_geo", text="Add Geo", icon="CURRENT_FILE")
+        row.operator("sceasar.remove_geo", text="Remove Geo", icon="CURRENT_FILE")
  
 
 class SCEASAR_PT_Modeling_Export(bpy.types.Panel):
