@@ -56,9 +56,9 @@ date_entry = DateEntry(
 date_entry.grid(row=4, column=0, columnspan=2, pady=5)
 
 # -------- Folder Structure --------
-folders_to_create = [
-    ["scene", "reference"],
-    ["scene", "download"],
+folders_to_create = [  
+    ["download"],
+    
     ["scene", "reference"],
 
     ["scene", "export", "3mf"],
@@ -78,14 +78,20 @@ folders_to_create = [
     ["scene", "texture", "compTexture"],
 
     ["scene", "workfile", "mod", "blender"],
+    ["scene", "workfile", "mod", "blender", "export", "fbx"],
+    ["scene", "workfile", "mod", "blender", "render"],
     ["scene", "workfile", "mod", "rhino"],
     ["scene", "workfile", "mod", "zbrush"],
     ["scene", "workfile", "tex", "illustrator"],
     ["scene", "workfile", "tex", "photoshop"],
     ["scene", "workfile", "tex", "substancePainter"],
     ["scene", "workfile", "uv", "blender"],
+    ["scene", "workfile", "uv", "blender", "export", "fbx"],
+    ["scene", "workfile", "uv", "blender", "render"],
     ["scene", "workfile", "uv", "rizomuv"],
     ["scene", "workfile", "lkd", "blender"],
+    ["scene", "workfile", "lkd", "blender", "export", "fbx"],
+    ["scene", "workfile", "lkd", "blender", "render"],
     ["scene", "workfile", "ani", "blender"],
     ["scene", "workfile", "fx", "aftereffects"],
     ["scene", "workfile", "fx", "houdini"],
