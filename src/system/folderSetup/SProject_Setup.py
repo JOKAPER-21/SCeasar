@@ -5,46 +5,50 @@ from datetime import datetime
 import os
 import shutil
 
+# ---------------- Colors -----------------
+BG_COLOR = "#0C0D10"        # Background
+TITLE_COLOR = "#b342ff"     # Section titles
+LABEL_COLOR = "white"         # Labels
+CHK_COLOR = "white"           # Checkboxes text
+ENTRY_BG = "#FFFFFF"        # Entry background
+ENTRY_FG = "black"            # Entry text
+BTN_BG = "#008013"          # Button background
+BTN_FG = "white"              # Button text
+
 # ---------------- GUI Setup -----------------
 root = tk.Tk()
 root.title("SPROJECT SETUP - powered by Jokaper21")
+root.configure(bg=BG_COLOR)
 
-# Window size
 window_width = 550
 window_height = 800
-
-# Get screen width and height
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
-
-# Calculate position x, y to center the window
 position_x = int((screen_width / 2) - (window_width / 2))
 position_y = int((screen_height / 2) - (window_height / 2))
-
-# Set window size + position
 root.geometry(f"{window_width}x{window_height}+{position_x}+{position_y}")
 root.resizable(False, False)
 root.columnconfigure(0, weight=1)
 root.columnconfigure(1, weight=1)
 
 # -------- Title & Inputs --------
-tk.Label(root, text="S PROJECT SETUP", font=("Helvetica", 18, "bold")).grid(
+tk.Label(root, text="S PROJECT SETUP", font=("Helvetica", 18, "bold"), fg=TITLE_COLOR, bg=BG_COLOR).grid(
     row=0, column=0, columnspan=2, pady=20
 )
 
-tk.Label(root, text="Project Name:", font=("Helvetica", 12)).grid(
+tk.Label(root, text="Project Name", font=("Helvetica", 12), fg=LABEL_COLOR, bg=BG_COLOR).grid(
     row=1, column=0, columnspan=2, pady=5
 )
-entry_project = tk.Entry(root, font=("Helvetica", 12), justify="center")
+entry_project = tk.Entry(root, font=("Helvetica", 12), justify="center", bg=ENTRY_BG, fg=ENTRY_FG, insertbackground="white")
 entry_project.grid(row=2, column=0, columnspan=2, pady=5, ipadx=100)
 
-tk.Label(root, text="Select Date:", font=("Helvetica", 12)).grid(
+tk.Label(root, text="Select Date", font=("Helvetica", 12), fg=LABEL_COLOR, bg=BG_COLOR).grid(
     row=3, column=0, columnspan=2, pady=5
 )
 date_entry = DateEntry(
     root,
     width=10,
-    background="darkblue",
+    background="#1C1E21",
     foreground="white",
     borderwidth=4,
     font=("Helvetica", 12),
@@ -207,17 +211,9 @@ software_categories = {
     ],
 }
 
-# -------- Friendly Display Names --------
 display_names = {
-    "ref": "Reference",
-    "mod": "Modeling",
-    "tex": "Texture",
-    "uv": "UV",
-    "lkd": "LookDev",
-    "ani": "Animation",
-    "fx": "Fx",
-    "cmp": "Compositing",
-    "edt": "Editorial",
+    "ref": "Reference", "mod": "Modeling", "tex": "Texture", "uv": "UV", "lkd": "LookDev",
+    "ani": "Animation", "fx": "Fx", "cmp": "Compositing", "edt": "Editorial"
 }
 
 left_column = ["ref", "mod", "tex", "uv", "lkd"]
@@ -229,7 +225,7 @@ software_vars = {}
 row_start = 5
 for idx, cat in enumerate(left_column):
     softwares = software_categories.get(cat, [])
-    tk.Label(root, text=f"{display_names[cat]}", font=("Helvetica", 12, "bold")).grid(
+    tk.Label(root, text=f"{display_names[cat]}", font=("Helvetica", 12, "bold"), fg=TITLE_COLOR, bg=BG_COLOR).grid(
         row=row_start + idx * 4,
         column=0,
         sticky="w",
@@ -239,7 +235,8 @@ for idx, cat in enumerate(left_column):
     for i, sw in enumerate(softwares):
         var = tk.BooleanVar(value=sw.get("default", True))
         chk = tk.Checkbutton(
-            root, text=sw["name"], variable=var, font=("Helvetica", 11)
+            root, text=sw["name"], variable=var, font=("Helvetica", 11),
+            fg=CHK_COLOR, bg=BG_COLOR, selectcolor=BG_COLOR, activebackground=BG_COLOR
         )
         chk.grid(row=row_start + idx * 4 + i + 1, column=0, sticky="w", padx=50, pady=2)
         software_vars[sw["name"] + "_" + cat] = {
@@ -251,7 +248,7 @@ for idx, cat in enumerate(left_column):
 
 for idx, cat in enumerate(right_column):
     softwares = software_categories.get(cat, [])
-    tk.Label(root, text=f"{display_names[cat]}", font=("Helvetica", 12, "bold")).grid(
+    tk.Label(root, text=f"{display_names[cat]}", font=("Helvetica", 12, "bold"), fg=TITLE_COLOR, bg=BG_COLOR).grid(
         row=row_start + idx * 4,
         column=1,
         sticky="w",
@@ -261,7 +258,8 @@ for idx, cat in enumerate(right_column):
     for i, sw in enumerate(softwares):
         var = tk.BooleanVar(value=sw.get("default", True))
         chk = tk.Checkbutton(
-            root, text=sw["name"], variable=var, font=("Helvetica", 11)
+            root, text=sw["name"], variable=var, font=("Helvetica", 11),
+            fg=CHK_COLOR, bg=BG_COLOR, selectcolor=BG_COLOR, activebackground=BG_COLOR
         )
         chk.grid(row=row_start + idx * 4 + i + 1, column=1, sticky="w", padx=50, pady=2)
         software_vars[sw["name"] + "_" + cat] = {
@@ -271,9 +269,8 @@ for idx, cat in enumerate(right_column):
             "category": cat,
         }
 
-# -------- Versioning Helper --------
+# -------- Versioning Helper & Submit Function --------
 def get_next_version(dest_folder, project_name, category, ext, formatted_date):
-    """Determine the next version number based on existing files, starting from v01."""
     existing_versions = []
     if os.path.exists(dest_folder):
         for f in os.listdir(dest_folder):
@@ -283,10 +280,9 @@ def get_next_version(dest_folder, project_name, category, ext, formatted_date):
                     existing_versions.append(int(ver_str))
                 except:
                     pass
-    next_ver = max(existing_versions) + 1 if existing_versions else 1  # start from 1
+    next_ver = max(existing_versions) + 1 if existing_versions else 1
     return f"v{next_ver:02d}"
 
-# -------- Submit Function --------
 def submit_form():
     project_name = entry_project.get().strip()
     if not project_name:
@@ -299,7 +295,6 @@ def submit_form():
 
     error_log = []
 
-    # Create all folders
     for path in folders_to_create:
         try:
             folder_path = os.path.join(base_path, *path)
@@ -307,7 +302,6 @@ def submit_form():
         except Exception as e:
             error_log.append(f"Failed to create folder {os.path.join(*path)}: {str(e)}")
 
-    # Copy selected software templates with versioning
     for name, info in software_vars.items():
         if info["var"].get():
             src = info["from"]
@@ -322,25 +316,35 @@ def submit_form():
             try:
                 shutil.copy2(src, dest_file)
             except Exception as e:
-                error_log.append(
-                    f"Failed to copy {name} from {src} to {dest_file}: {str(e)}"
-                )
+                error_log.append(f"Failed to copy {name} from {src} to {dest_file}: {str(e)}")
 
     if error_log:
         messagebox.showerror("Errors Occurred", "\n".join(error_log))
     else:
-        messagebox.showinfo(
-            "Success", f"Project created successfully:\n{base_path}"
-        )
+        messagebox.showinfo("Success", f"Project created successfully:\n{base_path}")
 
-# -------- Submit Button --------
-tk.Button(
-    root,
-    text="Create Project",
-    font=("Helvetica", 12),
-    bg="green",
-    fg="white",
-    command=submit_form,
-).grid(row=50, column=0, columnspan=2, pady=20)
+# -------- Rounded Button Function --------
+def rounded_button(master, text, command, bg, fg, radius=15, width=200, height=40):
+    canvas = tk.Canvas(master, width=width, height=height, bg=BG_COLOR, highlightthickness=0)
+    
+    # Draw rounded rectangle
+    canvas.create_arc((0, 0, radius*2, radius*2), start=90, extent=90, fill=bg, outline=bg)
+    canvas.create_arc((width-radius*2, 0, width, radius*2), start=0, extent=90, fill=bg, outline=bg)
+    canvas.create_arc((0, height-radius*2, radius*2, height), start=180, extent=90, fill=bg, outline=bg)
+    canvas.create_arc((width-radius*2, height-radius*2, width, height), start=270, extent=90, fill=bg, outline=bg)
+    canvas.create_rectangle(radius, 0, width-radius, height, fill=bg, outline=bg)
+    canvas.create_rectangle(0, radius, width, height-radius, fill=bg, outline=bg)
+    
+    # Add text
+    canvas.create_text(width/2, height/2, text=text, fill=fg, font=("Helvetica", 12))
+    
+    # Bind click
+    canvas.bind("<Button-1>", lambda e: command())
+    
+    return canvas
+
+# -------- Add Rounded Button --------
+rounded_btn = rounded_button(root, "Create Project", submit_form, BTN_BG, BTN_FG, radius=15, width=200, height=40)
+rounded_btn.grid(row=50, column=0, columnspan=2, pady=20)
 
 root.mainloop()

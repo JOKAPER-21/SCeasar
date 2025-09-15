@@ -4,8 +4,8 @@ import subprocess
 import sys
 
 # Source and destination paths
-src = r"S:\Pipeline\development\CG_SProjects\SCeasar\src\script"
-dst = r"C:\Users\ANANTHAN\AppData\Roaming\Blender Foundation\Blender\4.5\scripts\addons\S_Ceasar"
+src = r"S:\Pipeline\development\CG_SProjects\SCeasar\src\blender\script"
+dst = r"C:\Users\ANANTHAN\AppData\Roaming\Blender Foundation\Blender\4.5\scripts\addons\SCeasar"
 
 # Path to Blender executable
 blender_exe = r"C:\Program Files\Blender Foundation\Blender 4.5\blender.exe"
