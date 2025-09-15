@@ -49,5 +49,5 @@ def open_blender(blender_path):
 
 if __name__ == "__main__":
     replace_folder(src, dst)
-    enable_addon_in_blender(blender_exe, "S_Ceasar")
+    enable_addon_in_blender(blender_exe, "SCeasar")
     open_blender(blender_exe)
