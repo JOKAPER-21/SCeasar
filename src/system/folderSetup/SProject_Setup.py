@@ -32,17 +32,17 @@ root.columnconfigure(0, weight=1)
 root.columnconfigure(1, weight=1)
 
 # -------- Title & Inputs --------
-tk.Label(root, text="S PROJECT SETUP", font=("Helvetica", 18, "bold"), fg=TITLE_COLOR, bg=BG_COLOR).grid(
+tk.Label(root, text="S PROJECT SETUP", font=("Poppins", 18, "bold"), fg=TITLE_COLOR, bg=BG_COLOR).grid(
     row=0, column=0, columnspan=2, pady=20
 )
 
-tk.Label(root, text="Project Name", font=("Helvetica", 12), fg=LABEL_COLOR, bg=BG_COLOR).grid(
+tk.Label(root, text="Project Name", font=("Poppins", 12), fg=LABEL_COLOR, bg=BG_COLOR).grid(
     row=1, column=0, columnspan=2, pady=5
 )
-entry_project = tk.Entry(root, font=("Helvetica", 12), justify="center", bg=ENTRY_BG, fg=ENTRY_FG, insertbackground="white")
-entry_project.grid(row=2, column=0, columnspan=2, pady=5, ipadx=100)
+entry_project = tk.Entry(root, font=("Poppins", 12), justify="center", bg=ENTRY_BG, fg=ENTRY_FG, insertbackground="white")
+entry_project.grid(row=2, column=0, columnspan=2, pady=5, ipadx=100, ipady=8)
 
-tk.Label(root, text="Select Date", font=("Helvetica", 12), fg=LABEL_COLOR, bg=BG_COLOR).grid(
+tk.Label(root, text="Select Date", font=("Poppins", 12), fg=LABEL_COLOR, bg=BG_COLOR).grid(
     row=3, column=0, columnspan=2, pady=5
 )
 date_entry = DateEntry(
@@ -225,7 +225,7 @@ software_vars = {}
 row_start = 5
 for idx, cat in enumerate(left_column):
     softwares = software_categories.get(cat, [])
-    tk.Label(root, text=f"{display_names[cat]}", font=("Helvetica", 12, "bold"), fg=TITLE_COLOR, bg=BG_COLOR).grid(
+    tk.Label(root, text=f"{display_names[cat]}", font=("Poppins", 12, "bold"), fg=TITLE_COLOR, bg=BG_COLOR).grid(
         row=row_start + idx * 4,
         column=0,
         sticky="w",
@@ -235,7 +235,7 @@ for idx, cat in enumerate(left_column):
     for i, sw in enumerate(softwares):
         var = tk.BooleanVar(value=sw.get("default", True))
         chk = tk.Checkbutton(
-            root, text=sw["name"], variable=var, font=("Helvetica", 11),
+            root, text=sw["name"], variable=var, font=("Poppins", 11),
             fg=CHK_COLOR, bg=BG_COLOR, selectcolor=BG_COLOR, activebackground=BG_COLOR
         )
         chk.grid(row=row_start + idx * 4 + i + 1, column=0, sticky="w", padx=50, pady=2)
@@ -248,7 +248,7 @@ for idx, cat in enumerate(left_column):
 
 for idx, cat in enumerate(right_column):
     softwares = software_categories.get(cat, [])
-    tk.Label(root, text=f"{display_names[cat]}", font=("Helvetica", 12, "bold"), fg=TITLE_COLOR, bg=BG_COLOR).grid(
+    tk.Label(root, text=f"{display_names[cat]}", font=("Poppins", 12, "bold"), fg=TITLE_COLOR, bg=BG_COLOR).grid(
         row=row_start + idx * 4,
         column=1,
         sticky="w",
@@ -258,7 +258,7 @@ for idx, cat in enumerate(right_column):
     for i, sw in enumerate(softwares):
         var = tk.BooleanVar(value=sw.get("default", True))
         chk = tk.Checkbutton(
-            root, text=sw["name"], variable=var, font=("Helvetica", 11),
+            root, text=sw["name"], variable=var, font=("Poppins", 11),
             fg=CHK_COLOR, bg=BG_COLOR, selectcolor=BG_COLOR, activebackground=BG_COLOR
         )
         chk.grid(row=row_start + idx * 4 + i + 1, column=1, sticky="w", padx=50, pady=2)
@@ -336,7 +336,7 @@ def rounded_button(master, text, command, bg, fg, radius=15, width=200, height=4
     canvas.create_rectangle(0, radius, width, height-radius, fill=bg, outline=bg)
     
     # Add text
-    canvas.create_text(width/2, height/2, text=text, fill=fg, font=("Helvetica", 12))
+    canvas.create_text(width/2, height/2, text=text, fill=fg, font=("Poppins", 12))
     
     # Bind click
     canvas.bind("<Button-1>", lambda e: command())
