@@ -54,7 +54,7 @@ date_entry.grid(row=4, column=0, columnspan=2, pady=5)
 # -------- Folder Structure --------
 folders_to_create = [
     ["scene", "reference"],
-    ["scene", "downloads"],
+    ["scene", "download"],
     ["scene", "reference"],
 
     ["scene", "export", "3mf"],
@@ -64,14 +64,14 @@ folders_to_create = [
     ["scene", "export", "stl"],
     ["scene", "export", "usd"],
 
-    ["scene", "renderOutput", "image", "blender"],
-    ["scene", "renderOutput", "image", "photoshop"],
-    ["scene", "renderOutput", "imageSeq"],
-    ["scene", "renderOutput", "video"],
-    ["scene", "renderOutput", "showcase"],
+    ["scene", "render", "image", "blender"],
+    ["scene", "render", "image", "photoshop"],
+    ["scene", "render", "imageSeq"],
+    ["scene", "render", "video"],
+    ["scene", "render", "showcase"],
 
-    ["scene", "textures", "cgTextures"],
-    ["scene", "textures", "compTextures"],
+    ["scene", "texture", "cgTexture"],
+    ["scene", "texture", "compTexture"],
 
     ["scene", "workfile", "mod", "blender"],
     ["scene", "workfile", "mod", "rhino"],
