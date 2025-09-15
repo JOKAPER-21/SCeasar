@@ -1,0 +1,14 @@
+schema_version = "1.0.0"
+
+id = "sceasar"
+version = "1.0.0"
+name = "SCeasar"
+tagline = "Example Add-on"
+maintainer = "Your Name <you@example.com>"
+
+type = "add-on"
+
+blender_version_min = "4.0.0"
+license = ["GPL-3.0-or-later"]
+
+platforms = ["windows", "linux", "macos"]

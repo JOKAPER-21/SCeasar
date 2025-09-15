@@ -4,7 +4,7 @@ bl_info = {
     "version": (1, 0),
     "blender": (4, 5, 0),
     "location": "View3D > Sidebar > S Ceasar",
-    "description": "Pipeline Tools for Modeling and Texturing",
+    "description": "Production Pipeline Tools",
     "category": "3D View",
 }
 
