@@ -5,9 +5,7 @@ from . import (
     texturing_ui,
     lookdev_ui,
     rigging_ui,
-    layout_ui,
     animation_ui,
-    simulation_ui,
     fx_ui,
     lighting_ui,
     compositing_ui,
@@ -21,9 +19,7 @@ def register():
     texturing_ui.register()
     lookdev_ui.register()
     rigging_ui.register()
-    layout_ui.register()
     animation_ui.register()
-    simulation_ui.register()
     fx_ui.register()
     lighting_ui.register()
     compositing_ui.register()
@@ -34,9 +30,7 @@ def unregister():
     compositing_ui.unregister()
     lighting_ui.unregister()
     fx_ui.unregister()
-    simulation_ui.unregister()
     animation_ui.unregister()
-    layout_ui.unregister()
     rigging_ui.unregister()
     lookdev_ui.unregister()
     texturing_ui.unregister()
