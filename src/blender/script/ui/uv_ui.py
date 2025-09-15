@@ -1,8 +1,8 @@
 import bpy
 
-class SCEASAR_PT_Uv(bpy.types.Panel):
-    bl_label = "UV Mapping"
-    bl_idname = "SCEASAR_PT_uv"
+class SCEASAR_PT_UV_Tools(bpy.types.Panel):
+    bl_label = "UV Tools"
+    bl_idname = "SCEASAR_PT_UV_Tools"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
     bl_category = "S Ceasar"
@@ -14,15 +14,20 @@ class SCEASAR_PT_Uv(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
-        layout.label(text="UV Tools", icon="GROUP_UVS")
+        
+        box = layout.box()
+        box.label(text="Unwrap", icon="GROUP_UVS")
+        box.label(text="Smart UV Project", icon="MOD_UVPROJECT")
+        box.label(text="UV Sculpt", icon="SCULPTMODE_HLT")
 
-class SCEASAR_PT_Export_Uv(bpy.types.Panel):
-    bl_label = "Export"
-    bl_idname = "SCEASAR_PT_export_uv"
+
+class SCEASAR_PT_UV_Setting(bpy.types.Panel):
+    bl_label = "Settings"
+    bl_idname = "SCEASAR_PT_UV_Setting"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
     bl_category = "S Ceasar"
-    bl_parent_id = "SCEASAR_PT_uv"
+    bl_parent_id = "SCEASAR_PT_main"
     bl_options = {'DEFAULT_CLOSED'}
 
     @classmethod
@@ -31,12 +36,42 @@ class SCEASAR_PT_Export_Uv(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
-        layout.label(text="Export Options", icon="EXPORT")
+        
+        box = layout.box()
+        box.label(text="UV Stretch Display", icon="STYLUS_PRESSURE")
+        box.label(text="Sync Selection", icon="UV_SYNC_SELECT")
+
+
+class SCEASAR_PT_UV_Export(bpy.types.Panel):
+    bl_label = "Export"
+    bl_idname = "SCEASAR_PT_UV_Export"
+    bl_space_type = "VIEW_3D"
+    bl_region_type = "UI"
+    bl_category = "S Ceasar"
+    bl_parent_id = "SCEASAR_PT_main"
+    bl_options = {'DEFAULT_CLOSED'}
+
+    @classmethod
+    def poll(cls, context):
+        return context.scene.sceasar_props.mode == 'UV'
+
+    def draw(self, context):
+        layout = self.layout
+        layout.label(text="Export UV Layout", icon="EXPORT")
+
 
 def register():
-    bpy.utils.register_class(SCEASAR_PT_Uv)
-    bpy.utils.register_class(SCEASAR_PT_Export_Uv)
+    bpy.utils.register_class(SCEASAR_PT_UV_Tools)
+    bpy.utils.register_class(SCEASAR_PT_UV_Setting)
+    bpy.utils.register_class(SCEASAR_PT_UV_Export)
 
 def unregister():
-    bpy.utils.unregister_class(SCEASAR_PT_Export_Uv)
-    bpy.utils.unregister_class(SCEASAR_PT_Uv)
+    for cls in (
+        SCEASAR_PT_UV_Export,
+        SCEASAR_PT_UV_Setting,
+        SCEASAR_PT_UV_Tools,
+    ):
+        try:
+            bpy.utils.unregister_class(cls)
+        except RuntimeError:
+            pass

@@ -1,8 +1,8 @@
 import bpy
 
-class SCEASAR_PT_Basic_Modeling(bpy.types.Panel):
-    bl_label = "Basic Settings"
-    bl_idname = "SCEASAR_PT_Basic_modeling"
+class SCEASAR_PT_Modeling_Tools(bpy.types.Panel):
+    bl_label = "Modeling Tools"
+    bl_idname = "SCEASAR_PT_Modeling_Tools"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
     bl_category = "S Ceasar"
@@ -28,9 +28,9 @@ class SCEASAR_PT_Basic_Modeling(bpy.types.Panel):
         row.operator("sceasar.add_geo", text="Add Geo", icon="CURRENT_FILE")
         row.operator("sceasar.remove_geo", text="Remove Geo", icon="CURRENT_FILE")
 
-class SCEASAR_PT_Tools_Modeling(bpy.types.Panel):
-    bl_label = "Tools Settings"
-    bl_idname = "SCEASAR_PT_Tools_modeling"
+class SCEASAR_PT_Modeling_Setting(bpy.types.Panel):
+    bl_label = "Setting"
+    bl_idname = "SCEASAR_PT_Modeling_Setting"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
     bl_category = "S Ceasar"
@@ -48,9 +48,9 @@ class SCEASAR_PT_Tools_Modeling(bpy.types.Panel):
         box.label(text="Subdivision Surface", icon="MODIFIER")
  
 
-class SCEASAR_PT_Export_Modeling(bpy.types.Panel):
+class SCEASAR_PT_Modeling_Export(bpy.types.Panel):
     bl_label = "Export"
-    bl_idname = "SCEASAR_PT_export_modeling"
+    bl_idname = "SCEASAR_PT_Modeling_Export"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
     bl_category = "S Ceasar"
@@ -64,19 +64,18 @@ class SCEASAR_PT_Export_Modeling(bpy.types.Panel):
     def draw(self, context):
         layout = self.layout
         layout.label(text="Export Options", icon="EXPORT")
-        col = layout.column(align=True)
-        col.scale_y = 1.2
+
     
 def register():
-    bpy.utils.register_class(SCEASAR_PT_Basic_Modeling)
-    bpy.utils.register_class(SCEASAR_PT_Tools_Modeling)
-    bpy.utils.register_class(SCEASAR_PT_Export_Modeling)
+    bpy.utils.register_class(SCEASAR_PT_Modeling_Tools)
+    bpy.utils.register_class(SCEASAR_PT_Modeling_Setting)
+    bpy.utils.register_class(SCEASAR_PT_Modeling_Export)
 
 def unregister():
     for cls in (
-        SCEASAR_PT_Export_Modeling,
-        SCEASAR_PT_Tools_Modeling,
-        SCEASAR_PT_Basic_Modeling,
+        SCEASAR_PT_Modeling_Export,
+        SCEASAR_PT_Modeling_Setting,
+        SCEASAR_PT_Modeling_Tools,
     ):
         try:
             bpy.utils.unregister_class(cls)
