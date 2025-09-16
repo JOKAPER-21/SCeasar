@@ -57,6 +57,8 @@ date_entry.grid(row=4, column=0, columnspan=2, pady=5)
 
 # -------- Folder Structure --------
 folders_to_create = [  
+    ["dev"],
+    
     ["download"],
     
     ["scene", "reference"],
