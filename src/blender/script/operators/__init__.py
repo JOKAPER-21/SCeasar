@@ -1,4 +1,4 @@
-from . import modeling, uv, texturing, lookdev, rigging, animation, fx, lighting, compositing, rendering
+from . import modeling, uv, texturing, lookdev, rigging, animation, fx, lighting, compositing, rendering, viz_operators
 
 def register():
     modeling.register()
@@ -11,8 +11,10 @@ def register():
     lighting.register()
     compositing.register()
     rendering.register()
+    viz_operators.register()
 
 def unregister():
+    viz_operators.unregister()
     rendering.unregister()
     compositing.unregister()
     lighting.unregister()
