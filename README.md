@@ -1,4 +1,4 @@
-# Production Pipeline for Small Project
+# Production Pipeline for Small Project (Beta version)
 
 ## Project Structure
 - **assets** : Blender or other files for presets  
