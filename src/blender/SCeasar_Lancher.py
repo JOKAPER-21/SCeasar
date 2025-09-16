@@ -43,6 +43,7 @@ bpy.ops.wm.save_userpref()
 def open_blender(blender_path):
     if os.path.exists(blender_path):
         print(f"Launching Blender: {blender_path}")
+        
         subprocess.Popen([blender_path])
     else:
         print(f"Blender executable not found: {blender_path}")

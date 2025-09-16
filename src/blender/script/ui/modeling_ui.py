@@ -39,7 +39,7 @@ class SCEASAR_PT_Modeling_Setting(bpy.types.Panel):
         layout = self.layout
         
         box = layout.box()
-        box.label(text="Basic Setup", icon="OUTLINER_OB_MESH")
+        box.label(text="Basic Setup", icon="SETTINGS")
         row = box.row(align=True)
         row.operator("sceasar.add_geo", text="Add Geo", icon="CURRENT_FILE")
         row.operator("sceasar.remove_geo", text="Remove Geo", icon="CURRENT_FILE")
@@ -60,7 +60,12 @@ class SCEASAR_PT_Modeling_Export(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
-        layout.label(text="Export Options", icon="EXPORT")
+        
+        box = layout.box()
+        box.label(text="Fbx Export", icon="EXPORT")
+        row = box.row(align=True)
+        row.operator("sceasar.export_version_fbx", text="Version", icon="OUTLINER")
+        row.operator("sceasar.export_master_fbx", text="Master", icon="DECORATE_LOCKED")
 
     
 def register():
