@@ -7,7 +7,7 @@ class SCEASAR_Properties(bpy.types.PropertyGroup):
             ('MODELING', "Modeling", "Modeling Tools", 'GHOST_ENABLED', 0),
             ('UV', "UV Mapping", "UV Tools", 'UV', 1),
             ('TEXTURING', "Texturing", "Texturing Tools", 'BRUSHES_ALL', 2),
-            ('LOOKDEV', "Lookdev", "Look Development Tools", 'MATERIAL', 3),
+            ('LOOKDEV', "Lookdev", "Look Development Tools", 'MATSHADERBALL', 3),
             ('RIGGING', "Rigging", "Rigging Tools", 'BONE_DATA', 4),
             ('ANIMATION', "Animation", "Animation Tools", 'OUTLINER_OB_ARMATURE', 5),
             ('FX', "Effects", "FX Tools", 'OUTLINER_OB_POINTCLOUD', 6),

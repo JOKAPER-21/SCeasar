@@ -41,13 +41,13 @@ class SCEASAR_PT_Modeling_Setting(bpy.types.Panel):
         box = layout.box()
         box.label(text="Basic Setup", icon="SETTINGS")
         row = box.row(align=True)
-        row.operator("sceasar.add_geo", text="Add Geo", icon="CURRENT_FILE")
-        row.operator("sceasar.remove_geo", text="Remove Geo", icon="CURRENT_FILE")
+        row.operator("sceasar.add_geo", text="Add Geo", icon="ADD")
+        row.operator("sceasar.remove_geo", text="Remove Geo", icon="REMOVE")
  
 
-class SCEASAR_PT_Modeling_Export(bpy.types.Panel):
-    bl_label = "Export"
-    bl_idname = "SCEASAR_PT_Modeling_Export"
+class SCEASAR_PT_Modeling_IO(bpy.types.Panel):
+    bl_label = "Asset I/O"
+    bl_idname = "SCEASAR_PT_Modeling_IO"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
     bl_category = "S Ceasar"
@@ -65,17 +65,17 @@ class SCEASAR_PT_Modeling_Export(bpy.types.Panel):
         box.label(text="Fbx Export", icon="EXPORT")
         row = box.row(align=True)
         row.operator("sceasar.export_version_fbx", text="Version", icon="OUTLINER")
-        row.operator("sceasar.export_master_fbx", text="Master", icon="DECORATE_LOCKED")
+        row.operator("sceasar.export_master_fbx", text="Master", icon="PINNED")
 
     
 def register():
     bpy.utils.register_class(SCEASAR_PT_Modeling_Tools)
     bpy.utils.register_class(SCEASAR_PT_Modeling_Setting)
-    bpy.utils.register_class(SCEASAR_PT_Modeling_Export)
+    bpy.utils.register_class(SCEASAR_PT_Modeling_IO)
 
 def unregister():
     for cls in (
-        SCEASAR_PT_Modeling_Export,
+        SCEASAR_PT_Modeling_IO,
         SCEASAR_PT_Modeling_Setting,
         SCEASAR_PT_Modeling_Tools,
     ):
