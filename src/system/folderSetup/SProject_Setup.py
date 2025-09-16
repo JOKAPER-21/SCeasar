@@ -166,7 +166,7 @@ software_categories = {
     "lkd": [
         {
             "name": "Blender",
-            "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\blender_Template\4.5\Blender_4.5_Basic_setting.blend",
+            "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\blender_Template\4.5\Blender_4.5_Lookdev_setting.blend",
             "to": ["scene", "workfile", "lkd", "blender"],
             "default": True,
         },
