@@ -1,0 +1,13 @@
+mod/
+    Blender/
+        local/
+            <current_file.blend>
+        master/
+            <same_file.blend>
+uv/
+    Blender/
+        local/
+            <current_file.blend>
+
+
+import same collection hirachy from mod/Blender/master/<blender file.blend>

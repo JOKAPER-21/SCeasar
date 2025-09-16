@@ -4,10 +4,10 @@ from pathlib import Path
 from datetime import datetime
 import re
 
-class SCEASAR_OT_MOD_MASTER(Operator):
-    """Automatically save current Blender file into a 'master' folder next to 'local/'"""
-    bl_idname = "sceasar.save_to_master"
-    bl_label = "Save to Master"
+class SCEASAR_OT_UV_MASTER(Operator):
+    """Automatically save current Blender file into a 'master' folder next to 'local/' (UV version)"""
+    bl_idname = "sceasar.save_uv_to_master"
+    bl_label = "Save UV to Master"
     bl_options = {'REGISTER', 'UNDO'}
 
     enable_backups: bpy.props.BoolProperty(
@@ -41,13 +41,13 @@ class SCEASAR_OT_MOD_MASTER(Operator):
         original_name = Path(current_fp).stem  
 
         # Remove version numbers like _v01, _v12, etc.
-        mod_name = re.sub(r'_v\d{2,}', '', original_name, flags=re.IGNORECASE)
+        uv_name = re.sub(r'_v\d{2,}', '', original_name, flags=re.IGNORECASE)
 
-        # If filename contains _mod, append _mst after it
-        if re.search(r'_mod', mod_name, flags=re.IGNORECASE):
-            mod_name = re.sub(r'(_mod)', r'\1_mst', mod_name, flags=re.IGNORECASE)
+        # If filename contains _uv, append _uvm after it
+        if re.search(r'_uv', uv_name, flags=re.IGNORECASE):
+            uv_name = re.sub(r'(_uv)', r'\1m', uv_name, flags=re.IGNORECASE)
 
-        target_name = f"{mod_name}.blend"
+        target_name = f"{uv_name}.blend"
         target_path = master_dir / target_name
 
         # Create backup if enabled and file exists
@@ -76,11 +76,11 @@ class SCEASAR_OT_MOD_MASTER(Operator):
 
 # Register operator
 def register():
-    bpy.utils.register_class(SCEASAR_OT_MOD_MASTER)
+    bpy.utils.register_class(SCEASAR_OT_UV_MASTER)
 
 def unregister():
-    bpy.utils.unregister_class(SCEASAR_OT_MOD_MASTER)
+    bpy.utils.unregister_class(SCEASAR_OT_UV_MASTER)
 
 if __name__ == "__main__":
     register()
-    bpy.ops.sceasar.save_to_master()
+    bpy.ops.sceasar.save_uv_to_master()

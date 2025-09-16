@@ -57,9 +57,10 @@ class SCEASAR_PT_UV_IO(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
+        
         box = layout.box()
-        box.label(text="UV Stretch Display", icon="STYLUS_PRESSURE")
-        box.label(text="Sync Selection", icon="UV_SYNC_SELECT")
+        box.label(text="Import", icon="IMPORT")
+        box.operator("sceasar.import_mod_master", text="Model", icon="OUTLINER")
 
 
 def register():

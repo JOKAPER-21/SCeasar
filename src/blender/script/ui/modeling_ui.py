@@ -62,10 +62,15 @@ class SCEASAR_PT_Modeling_IO(bpy.types.Panel):
         layout = self.layout
         
         box = layout.box()
-        box.label(text="File Saving", icon="EXPORT")
-        row = box.row(align=True)
+        box.label(text="Import", icon="IMPORT")
+        
+        box = layout.box()
+        box.label(text="Export", icon="EXPORT")
+        
+        row = box.column(align=True)
         row.operator("sceasar.export_version_fbx", text="Version", icon="OUTLINER")
         row.operator("sceasar.save_to_master", text="Master", icon="PINNED")
+        
 
     
 def register():
