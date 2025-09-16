@@ -1,30 +1,29 @@
-Production Pipeline For Small Project
+# Production Pipeline for Small Project
 
+## Project Structure
+- **assets** : Blender or other files for presets  
+- **build** : Final addons  
+- **docs** : About scripts  
+- **src** : Software addons and project launcher  
 
-assets :
-    blender or other files for presets
+---
 
-build :
-    Final addons
+# How to Use SCeasar Addon
 
-docs :
-    About scripts
+## **Method 01**
+1. **Copy**: `SCeasar\src\blender\script` from GitHub.  
+2. **Paste**:  
+   `C:\Users\<user name>\AppData\Roaming\Blender Foundation\Blender\4.5\scripts\addons\SCeasar`  
+3. **Enable Addon**:  
+   Open **Blender** → **Edit > Preferences > Add-ons > Enable SCeasar**.  
+4. **Check**: In **N-Panel** inside the 3D View.  
 
-src :
-    softwares addons and project lancher
+---
 
-How to use SCeasar Addon
-
-**Method: 01**<br>
-Step 01: Copy **"SCeasar\src\blender\script"** from github.<br>
-Step 02: Paste it to **"C:\Users\<user name>\AppData\Roaming\Blender Foundation\Blender\4.5\scripts\addons\SCeasar"**.<br>
-Step 03: Open blender Edit >  Preferences > Add-ons > Enable SCeaser.<br>
-Step 04: Check in N-Panel in 3d_View.<br>
-<br>
-<br>
-**Method: 02**<br>
-Step 01: Download **"https://github.com/JOKAPER-21/SCeasar"** to local.<br>
-Step 02: Open folder called **SCeasar\src\blender*** Step 03: Open file **update_tools.py** in notepad.<br>
-Step 04: Replace src = r"<root folder>\SCeasar\src\blender\script".<br>
-Step 05: Replace dst = r"C:\Users\<user name>\AppData\Roaming\Blender Foundation\Blender\4.5\scripts\addons\SCeasar".<br>
-Step 06: To open blender double click **update_tools.py**. (NOTE: Run scrip for the first and only for updates.)<br>
+## **Method 02**
+1. **Download**: [SCeasar GitHub Repository](https://github.com/JOKAPER-21/SCeasar).  
+2. **Navigate**: Open folder `SCeasar\src\blender`.  
+3. **Edit File**: Open **update_tools.py** in Notepad.  
+4. **Set Source Path**:  
+   ```python
+   src = r"<root folder>\SCeasar\src\blender\script"
