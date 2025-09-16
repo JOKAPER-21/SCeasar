@@ -27,4 +27,7 @@
 4. **Set Source Path**:  
    ```python
     src = r"<root folder>\SCeasar\src\blender\script"
+    ```
+    ```python
     dst = r"C:\Users\<user name>\AppData\Roaming\Blender Foundation\Blender\4.5\scripts\addons\SCeasar"
+    ```
