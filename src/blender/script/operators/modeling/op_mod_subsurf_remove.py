@@ -12,7 +12,7 @@ class SCEASAR_OT_mod_remove_subsurf(bpy.types.Operator):
         meshes = [obj for obj in context.selected_objects if obj.type == 'MESH']
         count = 0
         for obj in meshes:
-            mod = obj.modifiers.get("MySubsurf")
+            mod = obj.modifiers.get("Subdivision")
             if mod:
                 obj.modifiers.remove(mod)
                 count += 1

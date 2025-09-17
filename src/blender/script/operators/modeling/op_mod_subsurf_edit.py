@@ -16,7 +16,7 @@ class SCEASAR_OT_mod_edit_subsurf_popup(bpy.types.Operator):
         meshes = [obj for obj in context.selected_objects if obj.type == 'MESH']
         count = 0
         for obj in meshes:
-            mod = obj.modifiers.get("MySubsurf")
+            mod = obj.modifiers.get("Subdivision")
             if mod:
                 mod.levels = self.viewport_levels
                 mod.render_levels = self.render_levels

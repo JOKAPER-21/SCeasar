@@ -20,7 +20,7 @@ class SCEASAR_OT_mod_add_subsurf_popup(bpy.types.Operator):
 
         for obj in meshes:
             if "MySubsurf" not in obj.modifiers:
-                mod = obj.modifiers.new(name="MySubsurf", type='SUBSURF')
+                mod = obj.modifiers.new(name="Subdivision", type='SUBSURF')
             else:
                 mod = obj.modifiers["MySubsurf"]
 

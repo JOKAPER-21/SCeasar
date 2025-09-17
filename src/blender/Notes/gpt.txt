@@ -1,13 +1,21 @@
 mod/
-    Blender/
-        local/
-            <current_file.blend>
-        master/
-            <same_file.blend>
-uv/
-    Blender/
-        local/
-            <current_file.blend>
-
-
-import same collection hirachy from mod/Blender/master/<blender file.blend>
+            ('MODELING', "Modeling", "Modeling Tools", 'GHOST_ENABLED', 0),
+            ('UV', "UV Mapping", "UV Tools", 'UV', 1),
+            ('TEXTURING', "Texturing", "Texturing Tools", 'BRUSHES_ALL', 2),
+            ('LOOKDEV', "Lookdev", "Look Development Tools", 'MATSHADERBALL', 3),
+            ('RIGGING', "Rigging", "Rigging Tools", 'BONE_DATA', 4),
+            ('ANIMATION', "Animation", "Animation Tools", 'OUTLINER_OB_ARMATURE', 5),
+            ('FX', "Effects", "FX Tools", 'OUTLINER_OB_POINTCLOUD', 6),
+            ('LIGHTING', "Lighting", "Lighting Tools", 'OUTLINER_OB_LIGHT', 7),
+            ('COMPOSITING', "Compositing", "Compositing Tools", 'NODETREE', 8),
+            ('RENDERING', "Rendering", "Rendering Tools", 'RENDER_STILL', 9),
+        ],
+mod
+UV
+tex
+lkd
+Rig
+ani
+fx
+lgt
+cmp

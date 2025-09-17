@@ -19,6 +19,12 @@ class SCEASAR_PT_UV_Tools(bpy.types.Panel):
         box.label(text="Unwrap", icon="GROUP_UVS")
         box.label(text="Smart UV Project", icon="MOD_UVPROJECT")
         box.label(text="UV Sculpt", icon="SCULPTMODE_HLT")
+                
+        box = layout.box()
+        box.label(text="Material", icon="SHADING_RENDERED")
+        row = box.column(align=True)
+        row.operator("sceasar.add_empty_mat", text="Empty Mat", icon="MATERIAL")
+        row.operator("sceasar.rename_uv_mat", text="Rename Mat", icon="MATERIAL")
 
 
 class SCEASAR_PT_UV_Setting(bpy.types.Panel):
