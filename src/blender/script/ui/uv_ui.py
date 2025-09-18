@@ -67,6 +67,9 @@ class SCEASAR_PT_UV_IO(bpy.types.Panel):
         box = layout.box()
         box.label(text="Import", icon="IMPORT")
         
+        row = box.column(align=True)
+        row.operator("sceasar.import_mod_master", text="Import Mod", icon="IMPORT")
+        
         box = layout.box()
         box.label(text="Export", icon="EXPORT")
         
