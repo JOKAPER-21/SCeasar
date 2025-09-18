@@ -68,8 +68,8 @@ class SCEASAR_PT_Modeling_IO(bpy.types.Panel):
         box.label(text="Export", icon="EXPORT")
         
         row = box.column(align=True)
-        row.operator("sceasar.export_version_fbx", text="Version", icon="OUTLINER")
-        row.operator("sceasar.save_to_master", text="Master", icon="PINNED")
+        row.operator("sceasar.export_mod_version_fbx", text="Fbx", icon="OUTLINER")
+        row.operator("sceasar.save_mod_to_master", text="Master", icon="PINNED")
         
 
     

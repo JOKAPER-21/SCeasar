@@ -2,9 +2,9 @@ import bpy
 import os
 import re
 
-class SCEASAR_OT_mod_export_version_fbx(bpy.types.Operator):
+class SCEASAR_OT_uv_export_version_fbx(bpy.types.Operator):
     """Export selected collections as FBX with version number"""
-    bl_idname = "sceasar.export_mod_version_fbx"
+    bl_idname = "sceasar.export_uv_version_fbx"
     bl_label = "Export Collection FBX (Versioned)"
     bl_options = {'REGISTER', 'UNDO'}
 
@@ -60,14 +60,14 @@ class SCEASAR_OT_mod_export_version_fbx(bpy.types.Operator):
 
 
 def menu_func(self, context):
-    self.layout.operator(SCEASAR_OT_mod_export_version_fbx.bl_idname)
+    self.layout.operator(SCEASAR_OT_uv_export_version_fbx.bl_idname)
 
 
 def register():
-    bpy.utils.register_class(SCEASAR_OT_mod_export_version_fbx)
+    bpy.utils.register_class(SCEASAR_OT_uv_export_version_fbx)
     bpy.types.TOPBAR_MT_file_export.append(menu_func)
 
 
 def unregister():
-    bpy.utils.unregister_class(SCEASAR_OT_mod_export_version_fbx)
+    bpy.utils.unregister_class(SCEASAR_OT_uv_export_version_fbx)
     bpy.types.TOPBAR_MT_file_export.remove(menu_func)

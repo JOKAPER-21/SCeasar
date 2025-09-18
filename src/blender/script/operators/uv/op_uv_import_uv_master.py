@@ -5,7 +5,7 @@ from pathlib import Path
 class SCEASAR_OT_import_mod_master(bpy.types.Operator):
     """Append collections from mod/blender/master/<.blend> into current file.
        If a collection already exists, delete it before importing."""
-    bl_idname = "sceasar.import_mod_master"
+    bl_idname = "sceasar.import_uv_master"
     bl_label = "Import Mod Master"
     bl_options = {'REGISTER', 'UNDO'}
 
@@ -23,7 +23,7 @@ class SCEASAR_OT_import_mod_master(bpy.types.Operator):
             self.report({'ERROR'}, "Invalid folder structure. Expected: scene/workfile/mod/blender/local")
             return {'CANCELLED'}
 
-        mod_master_folder = root_path / "mod" / "blender" / "master"
+        mod_master_folder = root_path / "uv" / "blender" / "master"
 
         # Find .blend files
         blend_files = list(mod_master_folder.glob("*.blend"))

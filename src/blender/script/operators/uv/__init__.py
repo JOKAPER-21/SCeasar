@@ -1,6 +1,6 @@
-from . import op_uv_export_master, op_uv_import_mod_master, op_uv_add_empty_mat, op_uv_rename_mat
+from . import op_uv_export_master, op_uv_export_version_fbx, op_uv_add_empty_mat, op_uv_import_uv_master, op_uv_rename_mat
 
-modules = [op_uv_export_master, op_uv_import_mod_master, op_uv_add_empty_mat, op_uv_rename_mat]
+modules = [op_uv_export_master, op_uv_export_version_fbx, op_uv_import_uv_master, op_uv_add_empty_mat, op_uv_rename_mat]
 
 def register():
     for m in modules:

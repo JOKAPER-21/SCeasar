@@ -21,7 +21,7 @@ root.title("SPROJECT SETUP - powered by Jokaper21")
 root.configure(bg=BG_COLOR)
 
 window_width = 550
-window_height = 800
+window_height = 850
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 position_x = int((screen_width / 2) - (window_width / 2))
@@ -79,26 +79,28 @@ folders_to_create = [
     ["scene", "texture", "cgTexture"],
     ["scene", "texture", "compTexture"],
 
-    ["scene", "workfile", "mod", "blender"],
-    ["scene", "workfile", "mod", "blender", "export", "fbx"],
-    ["scene", "workfile", "mod", "blender", "render"],
-    ["scene", "workfile", "mod", "rhino"],
-    ["scene", "workfile", "mod", "zbrush"],
-    ["scene", "workfile", "tex", "illustrator"],
-    ["scene", "workfile", "tex", "photoshop"],
-    ["scene", "workfile", "tex", "substancePainter"],
-    ["scene", "workfile", "uv", "blender"],
-    ["scene", "workfile", "uv", "blender", "export", "fbx"],
-    ["scene", "workfile", "uv", "blender", "render"],
-    ["scene", "workfile", "uv", "rizomuv"],
-    ["scene", "workfile", "lkd", "blender"],
-    ["scene", "workfile", "lkd", "blender", "export", "fbx"],
-    ["scene", "workfile", "lkd", "blender", "render"],
-    ["scene", "workfile", "ani", "blender"],
-    ["scene", "workfile", "fx", "aftereffects"],
-    ["scene", "workfile", "fx", "houdini"],
-    ["scene", "workfile", "cmp", "photoshop"],
-    ["scene", "workfile", "edt", "davinci"]
+    ["scene", "workfile", "mod", "local", "blender"],
+    ["scene", "workfile", "mod", "local", "blender", "export", "fbx"],
+    ["scene", "workfile", "mod", "local", "blender", "render"],
+    ["scene", "workfile", "mod", "local", "rhino"],
+    ["scene", "workfile", "mod", "local", "zbrush"],
+    ["scene", "workfile", "tex", "local", "blender"],
+    ["scene", "workfile", "tex", "local", "illustrator"],
+    ["scene", "workfile", "tex", "local", "photoshop"],
+    ["scene", "workfile", "tex", "local", "substancePainter"],
+    ["scene", "workfile", "uv", "local", "blender"],
+    ["scene", "workfile", "uv", "local", "blender", "export", "fbx"],
+    ["scene", "workfile", "uv", "local", "blender", "render"],
+    ["scene", "workfile", "uv", "local", "rizomuv"],
+    ["scene", "workfile", "lkd", "local", "blender"],
+    ["scene", "workfile", "lkd", "local", "blender", "export", "fbx"],
+    ["scene", "workfile", "lkd", "local", "blender", "render"],
+    ["scene", "workfile", "ani", "local", "blender"],
+    ["scene", "workfile", "ani", "local", "blender"],
+    ["scene", "workfile", "fx", "local", "aftereffects"],
+    ["scene", "workfile", "fx", "local", "houdini"],
+    ["scene", "workfile", "cmp", "local", "photoshop"],
+    ["scene", "workfile", "edt", "local", "davinci"]
 ]
 
 # -------- Software Templates --------
@@ -115,39 +117,45 @@ software_categories = {
         {
             "name": "Blender",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\blender_Template\4.5\Blender_4.5_Basic_setting.blend",
-            "to": ["scene", "workfile", "mod", "blender"],
+            "to": ["scene", "workfile", "mod", "local", "blender"],
             "default": True,
         },
         {
             "name": "Rhino",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\rhino_Template\2024\rhino2024_Basic_setting.3dm",
-            "to": ["scene", "workfile", "mod", "rhino"],
+            "to": ["scene", "workfile", "mod", "local", "rhino"],
             "default": False,
         },
         {
             "name": "Zbrush",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\zbrush_Template\2024\zbrush2024_Basic_setting.zpr",
-            "to": ["scene", "workfile", "mod", "zbrush"],
+            "to": ["scene", "workfile", "mod", "local", "zbrush"],
             "default": False,
         },
     ],
     "tex": [
         {
+            "name": "Blender",
+            "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\blender_Template\4.5\Blender_4.5_Basic_setting.blend",
+            "to": ["scene", "workfile", "tex", "local", "blender"],
+            "default": False,
+        },
+        {
             "name": "Illustrator",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\illustrator_Template\2021\Illustrator_2021_Basic_setting.ai",
-            "to": ["scene", "workfile", "tex", "illustrator"],
+            "to": ["scene", "workfile", "tex", "local", "illustrator"],
             "default": False,
         },
         {
             "name": "Photoshop",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\photoshop_Template\2021\Photoshop_2021_Basic_setting.psd",
-            "to": ["scene", "workfile", "tex", "photoshop"],
+            "to": ["scene", "workfile", "tex", "local", "photoshop"],
             "default": False,
         },
         {
             "name": "substancePainter",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\substancePainter_Template\2024\substancePainter_2024_Basic_setting.spp",
-            "to": ["scene", "workfile", "tex", "substancePainter"],
+            "to": ["scene", "workfile", "tex", "local", "substancePainter"],
             "default": True,
         },
     ],
@@ -155,13 +163,13 @@ software_categories = {
         {
             "name": "Blender",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\blender_Template\4.5\Blender_4.5_Basic_setting.blend",
-            "to": ["scene", "workfile", "uv", "blender"],
+            "to": ["scene", "workfile", "uv", "local", "blender"],
             "default": False,
         },
         {
             "name": "RizomUV",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\rizomuv_Template\2024\RizomUV VS RS 2024.0_Basic_setting.lnk",
-            "to": ["scene", "workfile", "uv", "rizomuv"],
+            "to": ["scene", "workfile", "uv", "local", "rizomuv"],
             "default": True,
         },
     ],
@@ -169,7 +177,7 @@ software_categories = {
         {
             "name": "Blender",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\blender_Template\4.5\Blender_4.5_Lookdev_setting.blend",
-            "to": ["scene", "workfile", "lkd", "blender"],
+            "to": ["scene", "workfile", "lkd", "local", "blender"],
             "default": True,
         },
     ],
@@ -177,7 +185,7 @@ software_categories = {
         {
             "name": "Blender",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\blender_Template\4.5\Blender_4.5_Basic_setting.blend",
-            "to": ["scene", "workfile", "ani", "blender"],
+            "to": ["scene", "workfile", "ani", "local", "blender"],
             "default": False,
         }
     ],
@@ -185,19 +193,19 @@ software_categories = {
         {
             "name": "Blender",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\blender_Template\4.5\Blender_4.5_Basic_setting.blend",
-            "to": ["scene", "workfile", "fx", "blender"],
+            "to": ["scene", "workfile", "fx", "local", "blender"],
             "default": False,
         },
         {
             "name": "AfterEffects",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\aftereffects_Template\2023\aftereffects_2023_Basic_setting.aep",
-            "to": ["scene", "workfile", "fx", "aftereffects"],
+            "to": ["scene", "workfile", "fx", "local", "aftereffects"],
             "default": False,
         },
         {
             "name": "Houdini",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\houdini_Template\19.5\houdini_19.5_Basic_setting.hip",
-            "to": ["scene", "workfile", "fx", "houdini"],
+            "to": ["scene", "workfile", "fx", "local", "houdini"],
             "default": False,
         },
     ],
@@ -205,7 +213,7 @@ software_categories = {
         {
             "name": "Photoshop",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\photoshop_Template\2021\Photoshop_2021_Basic_setting.psd",
-            "to": ["scene", "workfile", "cmp", "photoshop"],
+            "to": ["scene", "workfile", "cmp", "local", "photoshop"],
             "default": True,
         }
     ],
@@ -213,15 +221,22 @@ software_categories = {
         {
             "name": "AfterEffects",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\aftereffects_Template\2023\aftereffects_2023_Basic_setting.aep",
-            "to": ["scene", "workfile", "edt", "aftereffects"],
+            "to": ["scene", "workfile", "edt", "local", "aftereffects"],
             "default": False,
         }
     ],
 }
 
 display_names = {
-    "ref": "Reference", "mod": "Modeling", "tex": "Texture", "uv": "UV", "lkd": "LookDev",
-    "ani": "Animation", "fx": "Fx", "cmp": "Compositing", "edt": "Editorial"
+    "ref": "Reference",
+    "mod": "Modeling",
+    "tex": "Texture",
+    "uv": "UV",
+    "lkd": "LookDev",
+    "ani": "Animation",
+    "fx": "Fx",
+    "cmp": "Compositing",
+    "edt": "Editorial"
 }
 
 left_column = ["ref", "mod", "tex", "uv", "lkd"]
@@ -229,53 +244,60 @@ right_column = ["ani", "fx", "cmp", "edt"]
 
 software_vars = {}
 
-# -------- Left-aligned Checkboxes --------
 row_start = 5
-for idx, cat in enumerate(left_column):
-    softwares = software_categories.get(cat, [])
-    tk.Label(root, text=f"{display_names[cat]}", font=("Poppins", 12, "bold"), fg=TITLE_COLOR, bg=BG_COLOR).grid(
-        row=row_start + idx * 4,
-        column=0,
-        sticky="w",
-        padx=50,
-        pady=(10, 0),
-    )
-    for i, sw in enumerate(softwares):
-        var = tk.BooleanVar(value=sw.get("default", True))
-        chk = tk.Checkbutton(
-            root, text=sw["name"], variable=var, font=("Poppins", 11),
-            fg=CHK_COLOR, bg=BG_COLOR, selectcolor=BG_COLOR, activebackground=BG_COLOR
-        )
-        chk.grid(row=row_start + idx * 4 + i + 1, column=0, sticky="w", padx=50, pady=2)
-        software_vars[sw["name"] + "_" + cat] = {
-            "var": var,
-            "from": sw["from"],
-            "to": sw["to"],
-            "category": cat,
-        }
+current_row = row_start
 
-for idx, cat in enumerate(right_column):
+# Left column
+for cat in left_column:
     softwares = software_categories.get(cat, [])
-    tk.Label(root, text=f"{display_names[cat]}", font=("Poppins", 12, "bold"), fg=TITLE_COLOR, bg=BG_COLOR).grid(
-        row=row_start + idx * 4,
-        column=1,
-        sticky="w",
-        padx=50,
-        pady=(10, 0),
-    )
-    for i, sw in enumerate(softwares):
+    # Section label
+    tk.Label(
+        root, text=f"{display_names[cat]}", font=("Poppins", 12, "bold"),
+        fg=TITLE_COLOR, bg=BG_COLOR
+    ).grid(row=current_row, column=0, sticky="w", padx=50, pady=(10, 0))
+    current_row += 1
+
+    # Checkboxes
+    for sw in softwares:
         var = tk.BooleanVar(value=sw.get("default", True))
         chk = tk.Checkbutton(
             root, text=sw["name"], variable=var, font=("Poppins", 11),
             fg=CHK_COLOR, bg=BG_COLOR, selectcolor=BG_COLOR, activebackground=BG_COLOR
         )
-        chk.grid(row=row_start + idx * 4 + i + 1, column=1, sticky="w", padx=50, pady=2)
+        chk.grid(row=current_row, column=0, sticky="w", padx=50, pady=2)
         software_vars[sw["name"] + "_" + cat] = {
             "var": var,
             "from": sw["from"],
             "to": sw["to"],
             "category": cat,
         }
+        current_row += 1
+
+# Reset row counter for right column
+current_row = row_start
+for cat in right_column:
+    softwares = software_categories.get(cat, [])
+    tk.Label(
+        root, text=f"{display_names[cat]}", font=("Poppins", 12, "bold"),
+        fg=TITLE_COLOR, bg=BG_COLOR
+    ).grid(row=current_row, column=1, sticky="w", padx=50, pady=(10, 0))
+    current_row += 1
+
+    for sw in softwares:
+        var = tk.BooleanVar(value=sw.get("default", True))
+        chk = tk.Checkbutton(
+            root, text=sw["name"], variable=var, font=("Poppins", 11),
+            fg=CHK_COLOR, bg=BG_COLOR, selectcolor=BG_COLOR, activebackground=BG_COLOR
+        )
+        chk.grid(row=current_row, column=1, sticky="w", padx=50, pady=2)
+        software_vars[sw["name"] + "_" + cat] = {
+            "var": var,
+            "from": sw["from"],
+            "to": sw["to"],
+            "category": cat,
+        }
+        current_row += 1
+
 
 # -------- Versioning Helper & Submit Function --------
 def get_next_version(dest_folder, project_name, category, ext, formatted_date):

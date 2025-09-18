@@ -6,7 +6,7 @@ import re
 
 class SCEASAR_OT_MOD_MASTER(Operator):
     """Automatically save current Blender file into a 'master' folder next to 'local/'"""
-    bl_idname = "sceasar.save_to_master"
+    bl_idname = "sceasar.save_mod_to_master"
     bl_label = "Save to Master"
     bl_options = {'REGISTER', 'UNDO'}
 

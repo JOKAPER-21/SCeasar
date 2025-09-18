@@ -23,7 +23,7 @@ class SCEASAR_PT_UV_Tools(bpy.types.Panel):
         box = layout.box()
         box.label(text="Material", icon="SHADING_RENDERED")
         row = box.column(align=True)
-        row.operator("sceasar.add_empty_mat", text="Empty Mat", icon="MATERIAL")
+        row.operator("sceasar.uv_add_empty_mat", text="Empty Mat", icon="MATERIAL")
         row.operator("sceasar.rename_uv_mat", text="Rename Mat", icon="MATERIAL")
 
 
@@ -66,7 +66,13 @@ class SCEASAR_PT_UV_IO(bpy.types.Panel):
         
         box = layout.box()
         box.label(text="Import", icon="IMPORT")
-        box.operator("sceasar.import_mod_master", text="Model", icon="OUTLINER")
+        
+        box = layout.box()
+        box.label(text="Export", icon="EXPORT")
+        
+        row = box.column(align=True)
+        row.operator("sceasar.export_uv_version_fbx", text="Fbx", icon="OUTLINER")
+        row.operator("sceasar.save_uv_to_master", text="Master", icon="PINNED")
 
 
 def register():
