@@ -4,7 +4,7 @@ import shutil
 import json, os
 from logic.folders import create_folders
 from datetime import datetime
-from tkcalendar import DateEntry  # For selectable date
+from tkcalendar import DateEntry  # <- For selectable date
 
 # Load config
 with open("config/settings.json") as f:
@@ -13,68 +13,81 @@ with open("config/settings.json") as f:
 with open("config/theme.json") as f:
     theme = json.load(f)
 
-
 class ProjectSetupApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("SProject Setup")
+        self.root.title("SProject Setup - powered by jokaper")
         self.root.configure(bg=theme["colors"]["bg"])
-
-        # Make window full screen
-        self.root.attributes('-fullscreen', True)
 
         # ---- Title ----
         tk.Label(root, text="S PROJECT SETUP",
-                 font=("Poppins", 18, "bold"),
+                 font=("Poppins", 20, "bold"),
                  fg=theme["colors"]["title"],
-                 bg=theme["colors"]["bg"]).pack(pady=20)
+                 bg=theme["colors"]["bg"]).pack(pady=15)
 
         # ---- Project Name ----
         tk.Label(root, text="Project Name:",
-                 bg=theme["colors"]["bg"], fg=theme["colors"]["fg"]).pack()
+                 font=("Poppins", 12, "bold"), 
+                 bg=theme["colors"]["bg"], 
+                 fg=theme["colors"]["fg"]).pack()
         self.project_name_var = tk.StringVar()
-        tk.Entry(root, textvariable=self.project_name_var, font=("Poppins", 14)).pack(pady=5)
+        entry = tk.Entry(
+            root, 
+            textvariable=self.project_name_var, 
+            width=40,              # Width in characters
+            font=("Poppins", 14)     # Bigger font makes it taller
+        )
+        entry = tk.Entry(root, font=("Poppins", 14),
+                         width=40,
+                         justify="center",
+                         bg="white",
+                         fg="black")
+        entry.pack(pady=20, ipady=12, ipadx=30)  # ipady = taller, ipadx = wider
 
         # ---- Selectable Date ----
         tk.Label(root, text="Select Date:",
-                 bg=theme["colors"]["bg"], fg=theme["colors"]["fg"]).pack(pady=(10, 0))
+                 font=("Poppins", 12, "bold"),
+                 bg=theme["colors"]["bg"], 
+                 fg=theme["colors"]["fg"]).pack(pady=(10,0))
         self.date_entry = DateEntry(
             root,
-            width=12,
+            width=15,
+            hight=10,
             background='darkblue',
             foreground='white',
             borderwidth=2,
-            date_pattern='yy/mm/dd'  # Valid date format
+            date_pattern='yy/mm/dd'   # <- Add separators!
         )
-        self.date_entry.set_date(datetime.today())  # Default date
-        self.date_entry.pack(pady=5)
+        self.date_entry.set_date(datetime.today())  # <- Ensure default date is valid
+        self.date_entry.pack(pady=15)
+        
 
         # ---- Root Folder ----
         tk.Label(root, text="Root Folder:",
                  bg=theme["colors"]["bg"], fg=theme["colors"]["fg"]).pack()
         self.root_path_var = tk.StringVar(value=os.getcwd())
         frame = tk.Frame(root, bg=theme["colors"]["bg"])
-        frame.pack(pady=5)
-        tk.Entry(frame, textvariable=self.root_path_var, width=50, font=("Poppins", 12)).pack(side="left", padx=5)
+        frame.pack()
+        tk.Entry(frame, textvariable=self.root_path_var, width=40).pack(side="left", padx=15)
         tk.Button(frame, text="Browse", command=self.browse_root,
-                  bg=theme["colors"]["button_bg"], fg=theme["colors"]["fg"], font=("Poppins", 12)).pack(side="left")
+                  bg=theme["colors"]["button_bg"], fg=theme["colors"]["fg"]).pack(side="left")
 
         # ---- Software checkboxes ----
         self.software_vars = {}
         container = tk.Frame(root, bg=theme["colors"]["bg"])
-        container.pack(pady=20, fill="both", expand=True)
+        container.pack(pady=10)
 
         left_col = ["ref", "mod", "tex", "uv", "lkd"]
         right_col = ["ani", "fx", "cmp", "edt"]
 
         def build_column(column, side):
             col_frame = tk.Frame(container, bg=theme["colors"]["bg"])
-            col_frame.pack(side=side, padx=50, anchor="n")
+            col_frame.pack(side=side, padx=40)
 
             for cat in column:
                 tk.Label(col_frame, text=settings.get("display_names", {}).get(cat, cat.title()),
                          font=("Poppins", 14, "bold"),
-                         fg=theme["colors"]["title"], bg=theme["colors"]["bg"]).pack(anchor="w", pady=(10, 0))
+                         fg=theme["colors"]["title"], bg=theme["colors"]["bg"]).pack(anchor="w")
 
                 for sw in settings["software_templates"][cat]:
                     var = tk.BooleanVar(value=sw.get("default", False))
@@ -84,7 +97,7 @@ class ProjectSetupApp:
                                          bg=theme["colors"]["bg"],
                                          activebackground=theme["colors"]["bg"],
                                          selectcolor=theme["colors"]["bg"])
-                    chk.pack(anchor="w", padx=10)
+                    chk.pack(anchor="w", padx=30)
                     self.software_vars[f"{sw['name']}_{cat}"] = {
                         "var": var,
                         "from": sw["from"],
@@ -97,7 +110,7 @@ class ProjectSetupApp:
 
         # ---- Create Project button ----
         tk.Button(root, text="Create Project", command=self.create_project,
-                  bg=theme["colors"]["button_bg"], fg=theme["colors"]["fg"], font=("Poppins", 14)).pack(pady=20)
+                  bg=theme["colors"]["button_bg"], fg=theme["colors"]["fg"]).pack(pady=20)
 
     def browse_root(self):
         folder = filedialog.askdirectory(title="Select Root Project Folder")

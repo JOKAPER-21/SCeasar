@@ -20,8 +20,8 @@ root = tk.Tk()
 root.title("SPROJECT SETUP - powered by Jokaper21")
 root.configure(bg=BG_COLOR)
 
-window_width = 550
-window_height = 850
+window_width = 600
+window_height = 1200
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
 position_x = int((screen_width / 2) - (window_width / 2))
@@ -32,15 +32,22 @@ root.columnconfigure(0, weight=1)
 root.columnconfigure(1, weight=1)
 
 # -------- Title & Inputs --------
-tk.Label(root, text="S PROJECT SETUP", font=("Poppins", 18, "bold"), fg=TITLE_COLOR, bg=BG_COLOR).grid(
-    row=0, column=0, columnspan=2, pady=20
-)
+tk.Label(root, text="S PROJECT SETUP", 
+         font=("Poppins", 18, "bold"), 
+         fg=TITLE_COLOR, 
+         bg=BG_COLOR).grid(row=0, column=0, columnspan=2, pady=20)
 
-tk.Label(root, text="Project Name", font=("Poppins", 12), fg=LABEL_COLOR, bg=BG_COLOR).grid(
-    row=1, column=0, columnspan=2, pady=5
-)
-entry_project = tk.Entry(root, font=("Poppins", 12), justify="center", bg=ENTRY_BG, fg=ENTRY_FG, insertbackground="white")
-entry_project.grid(row=2, column=0, columnspan=2, pady=5, ipadx=100, ipady=8)
+tk.Label(root, text="Project Name", 
+         font=("Poppins", 12), 
+         fg=LABEL_COLOR, 
+         bg=BG_COLOR).grid(row=1, column=0, columnspan=2, pady=5)
+
+entry_project = tk.Entry(root, font=("Poppins", 12), 
+                         justify="left", 
+                         bg=ENTRY_BG, 
+                         fg=ENTRY_FG, 
+                         insertbackground="white")
+entry_project.grid(row=2, column=0, columnspan=2, pady=5, ipadx=200, ipady=8)
 
 tk.Label(root, text="Select Date", font=("Poppins", 12), fg=LABEL_COLOR, bg=BG_COLOR).grid(
     row=3, column=0, columnspan=2, pady=5

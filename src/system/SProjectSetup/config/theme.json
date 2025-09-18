@@ -1,14 +1,14 @@
 {
   "colors": {
-    "bg": "#1e1e2e",
-    "fg": "#f5f5f5",
-    "accent": "#6c63ff",
-    "button_bg": "#2c2c3e",
+    "bg": "#0C0D10",
+    "fg": "white",
+    "accent": "#white",
+    "button_bg": "#008013",
     "button_hover": "#3a3a52",
     "title": "#AA00FF"
   },
   "fonts": {
-    "default": ["Arial", 11],
-    "heading": ["Arial", 14, "bold"]
+    "default": ["Poppins", 11],
+    "heading": ["Poppins", 14, "bold"]
   }
 }
