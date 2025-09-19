@@ -1,0 +1,11 @@
+SProjectSetup
+  asset
+  config
+    settings.json
+    theme.json
+  logic
+    folders.py
+    templetes.py
+    versioning.py
+  main.py
+  ui.py

@@ -86,28 +86,24 @@ folders_to_create = [
     ["scene", "texture", "cgTexture"],
     ["scene", "texture", "compTexture"],
 
-    ["scene", "workfile", "mod", "local", "blender"],
-    ["scene", "workfile", "mod", "local", "blender", "export", "fbx"],
-    ["scene", "workfile", "mod", "local", "blender", "render"],
-    ["scene", "workfile", "mod", "local", "rhino"],
-    ["scene", "workfile", "mod", "local", "zbrush"],
-    ["scene", "workfile", "tex", "local", "blender"],
-    ["scene", "workfile", "tex", "local", "illustrator"],
-    ["scene", "workfile", "tex", "local", "photoshop"],
-    ["scene", "workfile", "tex", "local", "substancePainter"],
-    ["scene", "workfile", "uv", "local", "blender"],
-    ["scene", "workfile", "uv", "local", "blender", "export", "fbx"],
-    ["scene", "workfile", "uv", "local", "blender", "render"],
-    ["scene", "workfile", "uv", "local", "rizomuv"],
-    ["scene", "workfile", "lkd", "local", "blender"],
-    ["scene", "workfile", "lkd", "local", "blender", "export", "fbx"],
-    ["scene", "workfile", "lkd", "local", "blender", "render"],
-    ["scene", "workfile", "ani", "local", "blender"],
-    ["scene", "workfile", "ani", "local", "blender"],
-    ["scene", "workfile", "fx", "local", "aftereffects"],
-    ["scene", "workfile", "fx", "local", "houdini"],
-    ["scene", "workfile", "cmp", "local", "photoshop"],
-    ["scene", "workfile", "edt", "local", "davinci"]
+    ["scene", "workfile", "mod", "blender", "local"],
+    ["scene", "workfile", "mod", "rhino", "local"],
+    ["scene", "workfile", "mod", "zbrush", "local"],
+    ["scene", "workfile", "tex", "blender", "local"],
+    ["scene", "workfile", "tex", "illustrator", "local"],
+    ["scene", "workfile", "tex", "photoshop", "local"],
+    ["scene", "workfile", "tex", "substancePainter", "local"],
+    ["scene", "workfile", "uv", "blender", "local"],
+    ["scene", "workfile", "uv", "rizomuv", "local"],
+    ["scene", "workfile", "lkd", "blender", "local"],
+    ["scene", "workfile", "ani", "blender", "local"],
+    ["scene", "workfile", "ani", "blender", "local"],
+    ["scene", "workfile", "fx", "aftereffects", "local"],
+    ["scene", "workfile", "fx", "houdini", "local"],
+    ["scene", "workfile", "cmp", "photoshop", "local"],
+    ["scene", "workfile", "edt", "davinci", "local"]
+
+
 ]
 
 # -------- Software Templates --------
@@ -124,19 +120,19 @@ software_categories = {
         {
             "name": "Blender",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\blender_Template\4.5\Blender_4.5_Basic_setting.blend",
-            "to": ["scene", "workfile", "mod", "local", "blender"],
+            "to": ["scene", "workfile", "mod",  "blender"],
             "default": True,
         },
         {
             "name": "Rhino",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\rhino_Template\2024\rhino2024_Basic_setting.3dm",
-            "to": ["scene", "workfile", "mod", "local", "rhino"],
+            "to": ["scene", "workfile", "mod",  "rhino"],
             "default": False,
         },
         {
             "name": "Zbrush",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\zbrush_Template\2024\zbrush2024_Basic_setting.zpr",
-            "to": ["scene", "workfile", "mod", "local", "zbrush"],
+            "to": ["scene", "workfile", "mod",  "zbrush"],
             "default": False,
         },
     ],
@@ -144,25 +140,25 @@ software_categories = {
         {
             "name": "Blender",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\blender_Template\4.5\Blender_4.5_Basic_setting.blend",
-            "to": ["scene", "workfile", "tex", "local", "blender"],
+            "to": ["scene", "workfile", "tex",  "blender"],
             "default": False,
         },
         {
             "name": "Illustrator",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\illustrator_Template\2021\Illustrator_2021_Basic_setting.ai",
-            "to": ["scene", "workfile", "tex", "local", "illustrator"],
+            "to": ["scene", "workfile", "tex",  "illustrator"],
             "default": False,
         },
         {
             "name": "Photoshop",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\photoshop_Template\2021\Photoshop_2021_Basic_setting.psd",
-            "to": ["scene", "workfile", "tex", "local", "photoshop"],
+            "to": ["scene", "workfile", "tex",  "photoshop"],
             "default": False,
         },
         {
             "name": "substancePainter",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\substancePainter_Template\2024\substancePainter_2024_Basic_setting.spp",
-            "to": ["scene", "workfile", "tex", "local", "substancePainter"],
+            "to": ["scene", "workfile", "tex",  "substancePainter"],
             "default": True,
         },
     ],
@@ -170,13 +166,13 @@ software_categories = {
         {
             "name": "Blender",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\blender_Template\4.5\Blender_4.5_Basic_setting.blend",
-            "to": ["scene", "workfile", "uv", "local", "blender"],
+            "to": ["scene", "workfile", "uv",  "blender"],
             "default": False,
         },
         {
             "name": "RizomUV",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\rizomuv_Template\2024\RizomUV VS RS 2024.0_Basic_setting.lnk",
-            "to": ["scene", "workfile", "uv", "local", "rizomuv"],
+            "to": ["scene", "workfile", "uv",  "rizomuv"],
             "default": True,
         },
     ],
@@ -184,7 +180,7 @@ software_categories = {
         {
             "name": "Blender",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\blender_Template\4.5\Blender_4.5_Lookdev_setting.blend",
-            "to": ["scene", "workfile", "lkd", "local", "blender"],
+            "to": ["scene", "workfile", "lkd",  "blender"],
             "default": True,
         },
     ],
@@ -192,7 +188,7 @@ software_categories = {
         {
             "name": "Blender",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\blender_Template\4.5\Blender_4.5_Basic_setting.blend",
-            "to": ["scene", "workfile", "ani", "local", "blender"],
+            "to": ["scene", "workfile", "ani",  "blender"],
             "default": False,
         }
     ],
@@ -200,19 +196,19 @@ software_categories = {
         {
             "name": "Blender",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\blender_Template\4.5\Blender_4.5_Basic_setting.blend",
-            "to": ["scene", "workfile", "fx", "local", "blender"],
+            "to": ["scene", "workfile", "fx",  "blender"],
             "default": False,
         },
         {
             "name": "AfterEffects",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\aftereffects_Template\2023\aftereffects_2023_Basic_setting.aep",
-            "to": ["scene", "workfile", "fx", "local", "aftereffects"],
+            "to": ["scene", "workfile", "fx",  "aftereffects"],
             "default": False,
         },
         {
             "name": "Houdini",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\houdini_Template\19.5\houdini_19.5_Basic_setting.hip",
-            "to": ["scene", "workfile", "fx", "local", "houdini"],
+            "to": ["scene", "workfile", "fx",  "houdini"],
             "default": False,
         },
     ],
@@ -220,7 +216,7 @@ software_categories = {
         {
             "name": "Photoshop",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\photoshop_Template\2021\Photoshop_2021_Basic_setting.psd",
-            "to": ["scene", "workfile", "cmp", "local", "photoshop"],
+            "to": ["scene", "workfile", "cmp",  "photoshop"],
             "default": True,
         }
     ],
@@ -228,7 +224,7 @@ software_categories = {
         {
             "name": "AfterEffects",
             "from": r"S:\Pipeline\development\CG_SProjects\SCeasar\src\system\softwaresTemplates\aftereffects_Template\2023\aftereffects_2023_Basic_setting.aep",
-            "to": ["scene", "workfile", "edt", "local", "aftereffects"],
+            "to": ["scene", "workfile", "edt",  "aftereffects"],
             "default": False,
         }
     ],

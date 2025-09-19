@@ -4,17 +4,20 @@ import shutil
 import json, os
 from logic.folders import create_folders
 from datetime import datetime
-from tkcalendar import DateEntry  # <- For selectable date
+from tkcalendar import DateEntry
 
-# Load config
-with open("config/settings.json") as f:
+# ---------------- Resolve Config Path ----------------
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+with open(os.path.join(SCRIPT_DIR, "config", "settings.json")) as f:
     settings = json.load(f)
 
-with open("config/theme.json") as f:
+with open(os.path.join(SCRIPT_DIR, "config", "theme.json")) as f:
     theme = json.load(f)
 
+
 class ProjectSetupApp:
-    def __init__(self, root):
+    def __init__(self, root, default_root=None):
         self.root = root
         self.root.title("SProject Setup - powered by jokaper")
         self.root.configure(bg=theme["colors"]["bg"])
@@ -27,52 +30,51 @@ class ProjectSetupApp:
 
         # ---- Project Name ----
         tk.Label(root, text="Project Name:",
-                 font=("Poppins", 12, "bold"), 
-                 bg=theme["colors"]["bg"], 
+                 font=("Poppins", 12, "bold"),
+                 bg=theme["colors"]["bg"],
                  fg=theme["colors"]["fg"]).pack()
+
         self.project_name_var = tk.StringVar()
-        entry = tk.Entry(
-            root, 
-            textvariable=self.project_name_var, 
-            width=40,              # Width in characters
-            font=("Poppins", 14)     # Bigger font makes it taller
-        )
-        entry = tk.Entry(root, font=("Poppins", 14),
+        entry = tk.Entry(root,
+                         textvariable=self.project_name_var,
                          width=40,
+                         font=("Poppins", 14),
                          justify="center",
                          bg="white",
                          fg="black")
-        entry.pack(pady=20, ipady=12, ipadx=30)  # ipady = taller, ipadx = wider
+        entry.pack(pady=20, ipady=12, ipadx=30)
 
         # ---- Selectable Date ----
         tk.Label(root, text="Select Date:",
                  font=("Poppins", 12, "bold"),
-                 bg=theme["colors"]["bg"], 
-                 fg=theme["colors"]["fg"]).pack(pady=(10,0))
-        self.date_entry = DateEntry(
-            root,
-            width=15,
-            hight=10,
-            background='darkblue',
-            foreground='white',
-            borderwidth=2,
-            date_pattern='yy/mm/dd'   # <- Add separators!
-        )
-        self.date_entry.set_date(datetime.today())  # <- Ensure default date is valid
+                 bg=theme["colors"]["bg"],
+                 fg=theme["colors"]["fg"]).pack(pady=(10, 0))
+
+        self.date_entry = DateEntry(root,
+                                    width=15,
+                                    background='darkblue',
+                                    foreground='white',
+                                    borderwidth=2,
+                                    date_pattern='yy/mm/dd')
+        self.date_entry.set_date(datetime.today())
         self.date_entry.pack(pady=15)
-        
 
         # ---- Root Folder ----
         tk.Label(root, text="Root Folder:",
-                 bg=theme["colors"]["bg"], fg=theme["colors"]["fg"]).pack()
-        self.root_path_var = tk.StringVar(value=os.getcwd())
+                 bg=theme["colors"]["bg"],
+                 fg=theme["colors"]["fg"]).pack()
+
+        # Default = P:\SProjects if provided
+        self.root_path_var = tk.StringVar(value=default_root or os.getcwd())
+
         frame = tk.Frame(root, bg=theme["colors"]["bg"])
         frame.pack()
         tk.Entry(frame, textvariable=self.root_path_var, width=40).pack(side="left", padx=15)
         tk.Button(frame, text="Browse", command=self.browse_root,
-                  bg=theme["colors"]["button_bg"], fg=theme["colors"]["fg"]).pack(side="left")
+                  bg=theme["colors"]["button_bg"],
+                  fg=theme["colors"]["fg"]).pack(side="left")
 
-        # ---- Software checkboxes ----
+        # ---- Software Checkboxes ----
         self.software_vars = {}
         container = tk.Frame(root, bg=theme["colors"]["bg"])
         container.pack(pady=10)
@@ -85,13 +87,17 @@ class ProjectSetupApp:
             col_frame.pack(side=side, padx=40)
 
             for cat in column:
-                tk.Label(col_frame, text=settings.get("display_names", {}).get(cat, cat.title()),
+                tk.Label(col_frame,
+                         text=settings.get("display_names", {}).get(cat, cat.title()),
                          font=("Poppins", 14, "bold"),
-                         fg=theme["colors"]["title"], bg=theme["colors"]["bg"]).pack(anchor="w")
+                         fg=theme["colors"]["title"],
+                         bg=theme["colors"]["bg"]).pack(anchor="w")
 
                 for sw in settings["software_templates"][cat]:
                     var = tk.BooleanVar(value=sw.get("default", False))
-                    chk = tk.Checkbutton(col_frame, text=sw["name"], variable=var,
+                    chk = tk.Checkbutton(col_frame,
+                                         text=sw["name"],
+                                         variable=var,
                                          font=("Poppins", 12),
                                          fg=theme["colors"]["fg"],
                                          bg=theme["colors"]["bg"],
@@ -100,7 +106,7 @@ class ProjectSetupApp:
                     chk.pack(anchor="w", padx=30)
                     self.software_vars[f"{sw['name']}_{cat}"] = {
                         "var": var,
-                        "from": sw["from"],
+                        "from": os.path.join(SCRIPT_DIR, sw["from"]),  # templates relative to tool
                         "to": sw["to"],
                         "category": cat
                     }
@@ -108,12 +114,16 @@ class ProjectSetupApp:
         build_column(left_col, "left")
         build_column(right_col, "right")
 
-        # ---- Create Project button ----
-        tk.Button(root, text="Create Project", command=self.create_project,
-                  bg=theme["colors"]["button_bg"], fg=theme["colors"]["fg"]).pack(pady=20)
+        # ---- Create Project Button ----
+        tk.Button(root,
+                  text="Create Project",
+                  command=self.create_project,
+                  bg=theme["colors"]["button_bg"],
+                  fg=theme["colors"]["fg"]).pack(pady=20)
 
     def browse_root(self):
-        folder = filedialog.askdirectory(title="Select Root Project Folder")
+        folder = filedialog.askdirectory(title="Select Root Project Folder",
+                                         initialdir=self.root_path_var.get())
         if folder:
             self.root_path_var.set(folder)
 
@@ -123,12 +133,10 @@ class ProjectSetupApp:
             messagebox.showerror("Error", "Enter project name!")
             return
 
-        # Get selected date from calendar
         folder_date = self.date_entry.get_date().strftime("%y%m%d")
         base_path = os.path.join(self.root_path_var.get(), f"{folder_date}_{project_name}")
         os.makedirs(base_path, exist_ok=True)
 
-        # Create folder structure
         create_folders(base_path, settings["folders"])
 
         # Copy selected software templates with versioning
@@ -141,7 +149,6 @@ class ProjectSetupApp:
                 os.makedirs(dest_folder, exist_ok=True)
                 ext = os.path.splitext(src)[1]
 
-                # Determine next version
                 existing_versions = []
                 if os.path.exists(dest_folder):
                     for f in os.listdir(dest_folder):
@@ -153,25 +160,19 @@ class ProjectSetupApp:
                                 pass
                 next_ver = max(existing_versions) + 1 if existing_versions else 1
 
-                # Destination filename
-                dest_file = os.path.join(dest_folder, f"{project_name}_{category}_v{next_ver:02d}{ext}")
+                dest_file = os.path.join(dest_folder,
+                                         f"{project_name}_{category}_v{next_ver:02d}{ext}")
 
-                # Copy the template
                 try:
                     shutil.copy2(src, dest_file)
                 except Exception as e:
                     errors.append(f"{src} → {dest_file}: {str(e)}")
 
-        # Final message
         if errors:
-            messagebox.showwarning("Project Created with Warnings",
-                                   f"Project created at:\n{base_path}\n\nSome templates failed:\n" +
-                                   "\n".join(errors))
+            messagebox.showwarning(
+                "Project Created with Warnings",
+                f"Project created at:\n{base_path}\n\nSome templates failed:\n" +
+                "\n".join(errors)
+            )
         else:
             messagebox.showinfo("Success", f"Project created successfully at:\n{base_path}")
-
-
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = ProjectSetupApp(root)
-    root.mainloop()

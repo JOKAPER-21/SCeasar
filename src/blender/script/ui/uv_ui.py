@@ -14,11 +14,6 @@ class SCEASAR_PT_UV_Tools(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
-        
-        box = layout.box()
-        box.label(text="Unwrap", icon="GROUP_UVS")
-        box.label(text="Smart UV Project", icon="MOD_UVPROJECT")
-        box.label(text="UV Sculpt", icon="SCULPTMODE_HLT")
                 
         box = layout.box()
         box.label(text="Material", icon="SHADING_RENDERED")
@@ -69,6 +64,7 @@ class SCEASAR_PT_UV_IO(bpy.types.Panel):
         
         row = box.column(align=True)
         row.operator("sceasar.import_mod_master", text="Import Mod", icon="IMPORT")
+        row.operator("sceasar.import_all_collections", text="Updated collection", icon="IMPORT")
         
         box = layout.box()
         box.label(text="Export", icon="EXPORT")

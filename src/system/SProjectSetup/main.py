@@ -1,12 +1,10 @@
 import os
+import sys
 import tkinter as tk
-
-# Change working directory to the script's folder
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 from ui import ProjectSetupApp
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = ProjectSetupApp(root)
+    app = ProjectSetupApp(root, default_root=r"P:\SProjects")  # <-- force default root
     root.mainloop()

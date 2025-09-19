@@ -15,7 +15,7 @@ class SCEASAR_OT_import_uv_master(bpy.types.Operator):
             self.report({'ERROR'}, "Please save the current Blender file first.")
             return {'CANCELLED'}
 
-        # Get selected collection
+        # Get selected (active) collection
         layer_col = context.view_layer.active_layer_collection
         if not layer_col:
             self.report({'ERROR'}, "No collection selected in the Outliner.")
@@ -25,16 +25,17 @@ class SCEASAR_OT_import_uv_master(bpy.types.Operator):
 
         # Path to master .blend
         try:
-            root_path = current_file.parents[3]
+            root_path = current_file.parents[4]
         except IndexError:
             self.report({'ERROR'}, "Invalid folder structure. Expected: scene/workfile/mod/blender/local")
             return {'CANCELLED'}
 
-        master_folder = root_path / "mod" / "blender" / "master"
+        master_folder = root_path / "mod" / "blender" / "local" / "master"
         blend_files = list(master_folder.glob("*.blend"))
         if not blend_files:
             self.report({'ERROR'}, f"No .blend file found in {master_folder}")
             return {'CANCELLED'}
+
         master_file = blend_files[0]
 
         # Check if collection exists in master file
@@ -43,38 +44,48 @@ class SCEASAR_OT_import_uv_master(bpy.types.Operator):
                 self.report({'ERROR'}, f"Collection '{col_name}' not found in {master_file.name}")
                 return {'CANCELLED'}
 
-        # --- Remove old collection ---
+        # --- Remove old collection but remember parents ---
         old_col = bpy.data.collections.get(col_name)
-        if old_col:
-            # Unlink from scenes
-            for scene in bpy.data.scenes:
-                if col_name in scene.collection.children.keys():
-                    scene.collection.children.unlink(old_col)
+        parents = []
 
-            # Unlink from parent collections
+        if old_col:
+            # Save parent collections
             for parent in bpy.data.collections:
-                if col_name in parent.children.keys():
+                if col_name in parent.children:
+                    parents.append(parent)
+
+            # Save scene root only if no other parents exist
+            if not parents and col_name in context.scene.collection.children:
+                parents.append(context.scene.collection)
+
+            # Unlink from all parents
+            for parent in parents:
+                if col_name in parent.children:
                     parent.children.unlink(old_col)
 
             # Remove it completely
             bpy.data.collections.remove(old_col)
 
-        # Purge orphans (cleans unused datablocks)
-        bpy.ops.outliner.orphans_purge(
+        # Purge orphans until nothing left
+        while bpy.ops.outliner.orphans_purge(
             do_local_ids=True,
             do_linked_ids=True,
             do_recursive=True
-        )
+        ) != {'CANCELLED'}:
+            pass
 
         # --- Append fresh collection ---
         with bpy.data.libraries.load(str(master_file), link=False) as (data_from, data_to):
             data_to.collections = [col_name]
 
-        # Link to current scene
+        # Link back to previous parent(s)
         new_col = bpy.data.collections.get(col_name)
-        if new_col and col_name not in context.scene.collection.children.keys():
-            context.scene.collection.children.link(new_col)
+        if new_col:
+            for parent in parents:
+                if col_name not in parent.children:
+                    parent.children.link(new_col)
 
+        # ✅ Always return a set
         self.report({'INFO'}, f"✅ Collection '{col_name}' refreshed from {master_file.name}")
         return {'FINISHED'}
 
