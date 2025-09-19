@@ -60,7 +60,7 @@ def rename_material_slots_for_selected(context, verbose=True):
 # ------------------------
 # Operator
 # ------------------------
-class SCEASAR_OT_rename_mat(bpy.types.Operator):
+class SCEASAR_OT_TEX_rename_mat(bpy.types.Operator):
     """Rename all material slots of selected meshes to <mesh>_<AA>_Mat"""
     bl_idname = "sceasar.tex_rename_mat"
     bl_label = "Rename Material Slots to <obj>_<AA>_Mat"
@@ -79,7 +79,7 @@ class SCEASAR_OT_rename_mat(bpy.types.Operator):
 # ------------------------
 # Registration helpers
 # ------------------------
-classes = [SCEASAR_OT_rename_mat]
+classes = [SCEASAR_OT_TEX_rename_mat]
 
 def register():
     for cls in classes:

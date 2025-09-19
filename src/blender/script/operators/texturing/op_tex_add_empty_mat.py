@@ -10,7 +10,7 @@ def index_to_letters(index):
     return letters
 
 
-class SCEASAR_OT_Add_Empty_Material(bpy.types.Operator):
+class SCEASAR_OT_TEX_Add_Empty_Material(bpy.types.Operator):
     """Assign one new empty material per selected mesh (override old ones)"""
     bl_idname = "sceasar.tex_add_empty_mat"
     bl_label = "Assign Empty Material"
@@ -53,11 +53,12 @@ class SCEASAR_OT_Add_Empty_Material(bpy.types.Operator):
 
 # Register / Unregister
 def register():
-    bpy.utils.register_class(SCEASAR_OT_Add_Empty_Material)
+    bpy.utils.register_class(SCEASAR_OT_TEX_Add_Empty_Material)
 
 def unregister():
-    bpy.utils.unregister_class(SCEASAR_OT_Add_Empty_Material)
+    bpy.utils.unregister_class(SCEASAR_OT_TEX_Add_Empty_Material)
 
 
 if __name__ == "__main__":
     register()
+

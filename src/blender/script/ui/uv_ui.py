@@ -30,6 +30,12 @@ class SCEASAR_PT_UV_Cleanup(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
+        
+        box = layout.box()
+        box.label(text="UVMap", icon="UV")
+        
+        row = box.column(align=True)
+        row.operator("sceasar.uv_reset_uvmap", text="UVMap", icon="PLUS")
 
 
 class SCEASAR_PT_UV_IO(bpy.types.Panel):
@@ -52,8 +58,8 @@ class SCEASAR_PT_UV_IO(bpy.types.Panel):
         box.label(text="Import", icon="IMPORT")
         
         row = box.column(align=True)
-        row.operator("sceasar.import_mod_master", text="Import Mod", icon="IMPORT")
-        row.operator("sceasar.import_all_collections", text="Updated collection", icon="IMPORT")
+        row.operator("sceasar.import_mod_master", text="Import Mod")
+        row.operator("sceasar.import_all_collections", text="Updated collection")
         
         box = layout.box()
         box.label(text="Export", icon="EXPORT")
