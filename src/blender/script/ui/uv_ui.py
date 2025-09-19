@@ -15,13 +15,6 @@ class SCEASAR_PT_UV_Tools(bpy.types.Panel):
     def draw(self, context):
         layout = self.layout
                 
-        box = layout.box()
-        box.label(text="Material", icon="SHADING_RENDERED")
-        row = box.column(align=True)
-        row.operator("sceasar.uv_add_empty_mat", text="Empty Mat", icon="MATERIAL")
-        row.operator("sceasar.rename_uv_mat", text="Rename Mat", icon="MATERIAL")
-
-
 class SCEASAR_PT_UV_Setting(bpy.types.Panel):
     bl_label = "Settings"
     bl_idname = "SCEASAR_PT_UV_Setting"
@@ -37,10 +30,6 @@ class SCEASAR_PT_UV_Setting(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
-        
-        box = layout.box()
-        box.label(text="UV Stretch Display", icon="STYLUS_PRESSURE")
-        box.label(text="Sync Selection", icon="UV_SYNC_SELECT")
 
 
 class SCEASAR_PT_UV_IO(bpy.types.Panel):

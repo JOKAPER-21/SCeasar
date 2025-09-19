@@ -1,48 +1,93 @@
 import bpy
-from bpy.types import Operator
 
-def index_to_letters(index):
-    """Convert a numerical index to a two-letter code (AA, AB, ..., ZZ)."""
-    if index < 0:
-        return "AA"
-    first = chr(65 + (index // 26) % 26)  # wrap around A-Z
-    second = chr(65 + (index % 26))       # A-Z
-    return first + second
+# ------------------------
+# Helper
+# ------------------------
+def index_to_letters(index: int) -> str:
+    """Convert 0 -> 'AA', 1 -> 'AB', ..."""
+    letters = ""
+    index += 26  # start at 'AA' for index 0
+    while index >= 0:
+        letters = chr(index % 26 + ord('A')) + letters
+        index = index // 26 - 1
+    return letters
 
-class SCEASAR_OT_tex_rename_mat(Operator):
-    bl_idname = "sceasar.rename_materials"
-    bl_label = "Rename Materials"
-    bl_description = "Rename materials of selected mesh objects to <mesh_name>_<index>_Mat"
+
+def rename_material_slots_for_selected(context, verbose=True):
+    selected_meshes = [o for o in context.selected_objects if o.type == 'MESH']
+    if not selected_meshes:
+        if verbose:
+            print("No mesh objects selected.")
+        return 0
+
+    renamed_count = 0
+    skipped_count = 0
+
+    for obj in selected_meshes:
+        base_name = obj.name.replace("_Geo", "")
+        for idx, mat in enumerate(obj.data.materials):
+            if mat is None:
+                skipped_count += 1
+                if verbose:
+                    print(f"{obj.name} slot {idx}: empty - skipped.")
+                continue
+
+            new_name = f"{base_name}_{index_to_letters(idx)}_Mat"
+
+            if mat.name == new_name:
+                skipped_count += 1
+                if verbose:
+                    print(f"{obj.name} slot {idx}: already '{new_name}' - skipped.")
+                continue
+
+            if mat.users > 1 and verbose:
+                print(f"⚠ Warning: material '{mat.name}' is used by {mat.users} users.")
+
+            try:
+                mat.name = new_name
+                renamed_count += 1
+                if verbose:
+                    print(f"✔ Renamed {obj.name} slot {idx} -> '{new_name}'")
+            except Exception as e:
+                skipped_count += 1
+                print(f"❌ Failed to rename material for {obj.name} slot {idx}: {e}")
+
+    if verbose:
+        print(f"Done. Renamed: {renamed_count}, Skipped: {skipped_count}.")
+    return renamed_count
+
+
+# ------------------------
+# Operator
+# ------------------------
+class SCEASAR_OT_rename_mat(bpy.types.Operator):
+    """Rename all material slots of selected meshes to <mesh>_<AA>_Mat"""
+    bl_idname = "sceasar.tex_rename_mat"
+    bl_label = "Rename Material Slots to <obj>_<AA>_Mat"
     bl_options = {'REGISTER', 'UNDO'}
 
     @classmethod
     def poll(cls, context):
         return any(obj.type == 'MESH' for obj in context.selected_objects)
-
+    
     def execute(self, context):
-        mesh_objects = [obj for obj in context.selected_objects if obj.type == 'MESH']
-        
-        if not mesh_objects:
-            self.report({'WARNING'}, "No mesh objects selected")
-            return {'CANCELLED'}
-        
-        total_materials = 0
-        for obj in mesh_objects:
-            base_name = obj.name.replace("_Geo", "")
-            for i, slot in enumerate(obj.material_slots):
-                if slot.material:
-                    # Optional: make a unique copy to avoid renaming shared materials
-                    if slot.material.users > 1:
-                        slot.material = slot.material.copy()
-                    new_name = f"{base_name}_{index_to_letters(i)}_Mat"
-                    slot.material.name = new_name
-                    total_materials += 1
-        
-        self.report({'INFO'}, f"Renamed {total_materials} material(s) across {len(mesh_objects)} object(s)")
+        count = rename_material_slots_for_selected(context, verbose=True)
+        self.report({'INFO'}, f"Renamed {count} materials (see console for details).")
         return {'FINISHED'}
 
+
+# ------------------------
+# Registration helpers
+# ------------------------
+classes = [SCEASAR_OT_rename_mat]
+
 def register():
-    bpy.utils.register_class(SCEASAR_OT_tex_rename_mat)
+    for cls in classes:
+        bpy.utils.register_class(cls)
 
 def unregister():
-    bpy.utils.unregister_class(SCEASAR_OT_tex_rename_mat)
+    for cls in reversed(classes):
+        try:
+            bpy.utils.unregister_class(cls)
+        except RuntimeError:
+            pass

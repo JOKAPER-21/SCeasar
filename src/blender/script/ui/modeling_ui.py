@@ -22,9 +22,9 @@ class SCEASAR_PT_Modeling_Tools(bpy.types.Panel):
         row.operator("sceasar.edit_subsurf_popup", text="Edit", icon="GREASEPENCIL")
         row.operator("sceasar.remove_subsurf", text="Remove", icon="CANCEL")
 
-class SCEASAR_PT_Modeling_Setting(bpy.types.Panel):
-    bl_label = "Setting"
-    bl_idname = "SCEASAR_PT_Modeling_Setting"
+class SCEASAR_PT_Modeling_Cleanup(bpy.types.Panel):
+    bl_label = "Cleanup"
+    bl_idname = "SCEASAR_PT_Modeling_Cleanup"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
     bl_category = "S Ceasar"
@@ -75,13 +75,13 @@ class SCEASAR_PT_Modeling_IO(bpy.types.Panel):
     
 def register():
     bpy.utils.register_class(SCEASAR_PT_Modeling_Tools)
-    bpy.utils.register_class(SCEASAR_PT_Modeling_Setting)
+    bpy.utils.register_class(SCEASAR_PT_Modeling_Cleanup)
     bpy.utils.register_class(SCEASAR_PT_Modeling_IO)
 
 def unregister():
     for cls in (
         SCEASAR_PT_Modeling_IO,
-        SCEASAR_PT_Modeling_Setting,
+        SCEASAR_PT_Modeling_Cleanup,
         SCEASAR_PT_Modeling_Tools,
     ):
         try:

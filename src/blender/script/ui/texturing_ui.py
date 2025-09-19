@@ -14,22 +14,12 @@ class SCEASAR_PT_Texturing_Tools(bpy.types.Panel):
 
     def draw(self, context):
         layout = self.layout
-        
-        box = layout.box()         
-        box.label(text="Material Tools", icon="NODE_MATERIAL")
-        row = box.row(align=True)
-        row.operator("sceasar.add_empty_mat", text="Empty Mat", icon="SHADING_TEXTURE")
-        row.operator("sceasar.clear_all_mat", text="Clear All", icon="CANCEL")
-        
-        box = layout.box()
-        box.label(text="Basic Setup", icon="OUTLINER_OB_MESH")
-        row = box.row(align=True)
-        row.operator("sceasar.remove_geo", text="Remove Geo", icon="CURRENT_FILE")
 
 
-class SCEASAR_PT_Texturing_Setting(bpy.types.Panel):
-    bl_label = "Settings"
-    bl_idname = "SCEASAR_PT_Texturing_Setting"
+
+class SCEASAR_PT_Texturing_Cleanup(bpy.types.Panel):
+    bl_label = "Cleanup"
+    bl_idname = "SCEASAR_PT_Texturing_Cleanup"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
     bl_category = "S Ceasar"
@@ -42,8 +32,13 @@ class SCEASAR_PT_Texturing_Setting(bpy.types.Panel):
     
     def draw(self, context):
         layout = self.layout
-        layout.label(text="Export Options", icon="EXPORT")
-
+        
+        box = layout.box()
+        box.label(text="Material", icon="SHADING_RENDERED")
+        row = box.column(align=True)
+        row.operator("sceasar.tex_add_empty_mat", text="Add Mat", icon="PLUS")
+        row.operator("sceasar.tex_clear_all_mat", text="Clear Mat", icon="CANCEL")
+        row.operator("sceasar.tex_rename_mat", text="Rename Mat", icon="CURRENT_FILE")
 
 class SCEASAR_PT_Texturing_Export(bpy.types.Panel):
     bl_label = "Export"
@@ -65,13 +60,13 @@ class SCEASAR_PT_Texturing_Export(bpy.types.Panel):
 
 def register():
     bpy.utils.register_class(SCEASAR_PT_Texturing_Tools)
-    bpy.utils.register_class(SCEASAR_PT_Texturing_Setting)
+    bpy.utils.register_class(SCEASAR_PT_Texturing_Cleanup)
     bpy.utils.register_class(SCEASAR_PT_Texturing_Export)
 
 def unregister():
     for cls in (
         SCEASAR_PT_Texturing_Export,
-        SCEASAR_PT_Texturing_Setting,
+        SCEASAR_PT_Texturing_Cleanup,
         SCEASAR_PT_Texturing_Tools,
     ):
         try:
