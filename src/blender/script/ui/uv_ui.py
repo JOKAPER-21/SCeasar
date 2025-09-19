@@ -15,9 +15,9 @@ class SCEASAR_PT_UV_Tools(bpy.types.Panel):
     def draw(self, context):
         layout = self.layout
                 
-class SCEASAR_PT_UV_Setting(bpy.types.Panel):
-    bl_label = "Settings"
-    bl_idname = "SCEASAR_PT_UV_Setting"
+class SCEASAR_PT_UV_Cleanup(bpy.types.Panel):
+    bl_label = "Cleanup"
+    bl_idname = "SCEASAR_PT_UV_Cleanup"
     bl_space_type = "VIEW_3D"
     bl_region_type = "UI"
     bl_category = "S Ceasar"
@@ -65,13 +65,13 @@ class SCEASAR_PT_UV_IO(bpy.types.Panel):
 
 def register():
     bpy.utils.register_class(SCEASAR_PT_UV_Tools)
-    bpy.utils.register_class(SCEASAR_PT_UV_Setting)
+    bpy.utils.register_class(SCEASAR_PT_UV_Cleanup)
     bpy.utils.register_class(SCEASAR_PT_UV_IO)
 
 def unregister():
     for cls in (
         SCEASAR_PT_UV_IO,
-        SCEASAR_PT_UV_Setting,
+        SCEASAR_PT_UV_Cleanup,
         SCEASAR_PT_UV_Tools,
     ):
         try:

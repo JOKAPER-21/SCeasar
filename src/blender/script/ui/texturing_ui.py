@@ -35,10 +35,11 @@ class SCEASAR_PT_Texturing_Cleanup(bpy.types.Panel):
         
         box = layout.box()
         box.label(text="Material", icon="SHADING_RENDERED")
-        row = box.column(align=True)
-        row.operator("sceasar.tex_add_empty_mat", text="Add Mat", icon="PLUS")
-        row.operator("sceasar.tex_clear_all_mat", text="Clear Mat", icon="CANCEL")
-        row.operator("sceasar.tex_rename_mat", text="Rename Mat", icon="CURRENT_FILE")
+        row = box.row(align=True)
+        row.operator("sceasar.tex_add_empty_mat", text="Add", icon="PLUS")
+        row.operator("sceasar.tex_rename_mat", text="Rename", icon="CURRENT_FILE")
+        row.operator("sceasar.tex_remove_all_mat", text="Clear", icon="CANCEL")
+
 
 class SCEASAR_PT_Texturing_Export(bpy.types.Panel):
     bl_label = "Export"

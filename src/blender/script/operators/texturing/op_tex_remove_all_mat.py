@@ -1,9 +1,9 @@
 import bpy
 from bpy.types import Operator, Panel
 
-class SCEASAR_OT_tex_clear_all_materials(Operator):
-    bl_idname = "sceasar.tex_clear_all_mat"
-    bl_label = "Clear All Materials"
+class SCEASAR_OT_tex_remove_all_materials(Operator):
+    bl_idname = "sceasar.tex_remove_all_mat"
+    bl_label = "remove All Materials"
     bl_description = "Remove all material slots from selected mesh objects"
     bl_options = {'REGISTER', 'UNDO'}
 
@@ -19,16 +19,16 @@ class SCEASAR_OT_tex_clear_all_materials(Operator):
             self.report({'WARNING'}, "No mesh objects selected")
             return {'CANCELLED'}
             
-        # Clear materials from each mesh object
+        # remove materials from each mesh object
         for obj in mesh_objects:
             obj.data.materials.clear()
             
-        self.report({'INFO'}, f"Cleared materials from {len(mesh_objects)} object(s)")
+        self.report({'INFO'}, f"Removed materials from {len(mesh_objects)} object(s)")
         return {'FINISHED'}
 
 def register():
-    bpy.utils.register_class(SCEASAR_OT_tex_clear_all_materials)
+    bpy.utils.register_class(SCEASAR_OT_tex_remove_all_materials)
 
 
 def unregister():
-    bpy.utils.unregister_class(SCEASAR_OT_tex_clear_all_materials)
+    bpy.utils.unregister_class(SCEASAR_OT_tex_remove_all_materials)
