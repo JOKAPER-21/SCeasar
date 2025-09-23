@@ -17,12 +17,14 @@ class SCEASAR_PT_Modeling_Tools(bpy.types.Panel):
         
         box = layout.box()
         box.label(text="Subdivision Surface", icon="MODIFIER")
-        row = box.row(align=True)
+
+        col = box.column(align=True)  # Main column, no extra gap
+        row = col.row(align=True)     # Horizontal row for first three buttons
         row.operator("sceasar.add_subsurf_popup", text="Add", icon="PLUS")
         row.operator("sceasar.edit_subsurf_popup", text="Edit", icon="GREASEPENCIL")
         row.operator("sceasar.remove_subsurf", text="Remove", icon="CANCEL")
-        row = box.row(align=True)
-        row.operator("sceasar.mod_apply_subsurf_mods", text="Apply", icon="CHECKMARK")
+        col.operator("sceasar.mod_apply_subsurf_mods", text="Apply", icon="CHECKMARK")
+
         
 class SCEASAR_PT_Modeling_Cleanup(bpy.types.Panel):
     bl_label = "Cleanup"

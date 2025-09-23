@@ -5,6 +5,10 @@ class SCEASAR_OT_mod_apply_subsurf(bpy.types.Operator):
     bl_idname = "sceasar.mod_apply_subsurf_mods"
     bl_label = "Apply Subdivision Surface Modifiers"
     bl_options = {'REGISTER', 'UNDO'}
+    
+    @classmethod
+    def poll(cls, context):
+        return context.selected_objects and any(obj.type == 'MESH' and obj.data.uv_layers for obj in context.selected_objects)
 
     def execute(self, context):
         for obj in context.selected_objects:
