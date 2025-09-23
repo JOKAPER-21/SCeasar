@@ -1,7 +1,6 @@
 import os
 import shutil
 import subprocess
-import sys
 
 # Source and destination paths
 src = r"S:\Pipeline\development\CG_SProjects\SCeasar\src\blender\script"

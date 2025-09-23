@@ -35,7 +35,8 @@ class SCEASAR_PT_UV_Cleanup(bpy.types.Panel):
         box.label(text="UVMap", icon="UV")
         
         row = box.column(align=True)
-        row.operator("sceasar.uv_reset_uvmap", text="UVMap", icon="PLUS")
+        row.operator("sceasar.uv_rename_uvmap", text="UVMap", icon="PLUS")
+        row.operator("sceasar.uv_remove_automap", text="automap", icon="CANCEL")
 
 
 class SCEASAR_PT_UV_IO(bpy.types.Panel):

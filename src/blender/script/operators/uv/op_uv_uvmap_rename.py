@@ -1,9 +1,9 @@
 import bpy
 
-class SCEASAR_OT_UV_reset_uvmap(bpy.types.Operator):
-    """Remove all UV maps and create a new one named 'UVMap'"""
-    bl_idname = "sceasar.uv_reset_uvmap"
-    bl_label = "Reset UVMap"
+class SCEASAR_OT_UV_rename_uvmap(bpy.types.Operator):
+    """Rename first UV map to 'UVMap' without changing UV data"""
+    bl_idname = "sceasar.uv_rename_uvmap"
+    bl_label = "Rename UVMap"
     bl_options = {'REGISTER', 'UNDO'}
 
     def execute(self, context):
@@ -11,14 +11,11 @@ class SCEASAR_OT_UV_reset_uvmap(bpy.types.Operator):
             if obj.type == 'MESH':
                 mesh = obj.data
 
-                # Remove all existing UV maps
-                while mesh.uv_layers:
-                    mesh.uv_layers.remove(mesh.uv_layers[0])
-
-                # Create a new UV map named "UVMap"
-                mesh.uv_layers.new(name="UVMap")
-
-                self.report({'INFO'}, f"{obj.name}: UV maps reset to 'UVMap'")
+                if mesh.uv_layers:
+                    mesh.uv_layers[0].name = "UVMap"
+                    self.report({'INFO'}, f"{obj.name}: UV map renamed to 'UVMap'")
+                else:
+                    self.report({'WARNING'}, f"{obj.name} has no UV maps")
             else:
                 self.report({'WARNING'}, f"{obj.name} skipped (not a mesh)")
         
@@ -26,13 +23,13 @@ class SCEASAR_OT_UV_reset_uvmap(bpy.types.Operator):
 
 
 def register():
-    bpy.utils.register_class(SCEASAR_OT_UV_reset_uvmap)
+    bpy.utils.register_class(SCEASAR_OT_UV_rename_uvmap)
 
 def unregister():
-    bpy.utils.unregister_class(SCEASAR_OT_UV_reset_uvmap)
+    bpy.utils.unregister_class(SCEASAR_OT_UV_rename_uvmap)
 
 # Run directly when executing in the Text Editor
 if __name__ == "__main__":
     register()
     # Auto-run the operator on current selection
-    bpy.ops.object.reset_uvmap()
+    bpy.ops.sceasar.uv_rename_uvmap()
